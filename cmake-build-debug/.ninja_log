@@ -1,0 +1,14 @@
+# ninja log v6
+3	245	1729956646118329287	build.ninja	100cb5c7204e0e3e
+6	743	1729956013503033000	OOP_QT_Project_autogen/timestamp	d4b7554517cb2ea9
+745	2085	1729956013522302295	CMakeFiles/OOP_QT_Project.dir/array.cpp.o	55459d142ee88215
+747	2135	1729956013523762619	CMakeFiles/OOP_QT_Project.dir/complex.cpp.o	742b57a1212f33a1
+3682	3931	1729956016459510057	OOP_QT_Project	77a6b6cc1fbd419e
+745	3018	1729956013521781980	CMakeFiles/OOP_QT_Project.dir/OOP_QT_Project_autogen/mocs_compilation.cpp.o	40ce3bf07234a4f2
+6	743	1729956013503033000	/Users/kirillbelaev/CLionProjects/OOP_QT_Project/cmake-build-debug/OOP_QT_Project_autogen/timestamp	d4b7554517cb2ea9
+6	743	1729956013503033000	OOP_QT_Project_autogen/mocs_compilation.cpp	d4b7554517cb2ea9
+748	2087	1729956013525273066	CMakeFiles/OOP_QT_Project.dir/polynom.cpp.o	a269f9a81805a22a
+745	3072	1729956013522110510	CMakeFiles/OOP_QT_Project.dir/main.cpp.o	fd2d1d4497c6aac2
+745	2152	1729956013522481122	CMakeFiles/OOP_QT_Project.dir/application.cpp.o	a0f5ac30b7b73197
+6	743	1729956013503033000	/Users/kirillbelaev/CLionProjects/OOP_QT_Project/cmake-build-debug/OOP_QT_Project_autogen/mocs_compilation.cpp	d4b7554517cb2ea9
+2085	3682	1729956014861987955	CMakeFiles/OOP_QT_Project.dir/interface.cpp.o	b8b2720bc8421f3a
