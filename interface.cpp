@@ -6,90 +6,97 @@ Tinterface::Tinterface(std::string title, QWidget *parent)
     setWindowTitle(QString::fromStdString(title));
     setFixedSize(700, 400);
 
-    name_a = new QLabel("a =",this);
-    name_a->setGeometry(50, 20, 30, 25);
-    a_re = new QLineEdit("1",this);
-    a_re->  setGeometry(90,20,50,25);
-    delimeter_a = new QLabel("+i", this);
-    delimeter_a->setGeometry (150,20,30,25);
-    a_im = new QLineEdit("0",this);
-    a_im->setGeometry (190,20,50,25);
+    coeffsLabel = new QLabel("Коэффициент:", this);
+    coeffsLabel->setGeometry(50, 20, 100, 25);
+    reCoeffsLE = new QLineEdit("0", this);
+    reCoeffsLE->setGeometry(150, 20, 25, 25);
+    imIndicator = new QLabel("+i", this);
+    imIndicator->setGeometry(180, 20, 25, 25);
+    imCoeffsLE = new QLineEdit("0", this);
+    imCoeffsLE->setGeometry(210, 20, 25, 25);
 
-    name_b = new QLabel("b =",this);
-    name_b->setGeometry(50, 50, 30, 25);
-    b_re = new QLineEdit("1",this);
-    b_re->  setGeometry(90,50,50,25);
-    delimeter_b = new QLabel("+i", this);
-    delimeter_b->setGeometry (150,50,30,25);
-    b_im = new QLineEdit("0",this);
-    b_im->setGeometry (190,50,50,25);
+    addRootBTN = new QPushButton("Добавить корень", this);
+    addRootBTN->setGeometry(50, 50, 150, 30);
+    //connect(addRootBTN, SIGNAL(clicked(bool)), this, SLOT(addRoot(reCoeffsLE, imCoeffsLE)));
 
-    name_c = new QLabel("c =",this);
-    name_c->setGeometry(50,80,30,25);
-    c_re = new QLineEdit("1",this);
-    c_re->  setGeometry(90,80,50,25);
-    delimeter_c = new QLabel("+i", this);
-    delimeter_c->setGeometry (150,80,30,25);
-    c_im = new QLineEdit("0",this);
-    c_im->setGeometry (190,80,50,25);
+    changeRootBTN = new QPushButton("Изменить корень с индексом", this);
+    changeRootBTN->setGeometry(250, 50, 200, 30);
+    changeRootLineEdit = new QLineEdit(this);
+    changeRootLineEdit->setGeometry(455, 50, 30, 30);
+    //connect(changeRootBTN, SIGNAL())
 
-    name_x = new QLabel("x =",this);
-    name_x->setGeometry(50,110, 30, 25);
-    x_re = new QLineEdit("1",this);
-    x_re->  setGeometry(90,110,50,25);
-    delimeter_x = new QLabel("+i", this);
-    delimeter_x->setGeometry (150,110,30,25);
-    x_im = new QLineEdit("0",this);
-    x_im->setGeometry (190,110,50,25) ;
+    leadingCoeff = new QLabel("an = ", this);
+    leadingCoeff->setGeometry(50, 90, 25, 25);
+    reLeadCoeff = new QLineEdit(this);
+    reLeadCoeff->setGeometry(90, 90, 25, 25);
+    imIndicator = new QLabel("+i", this);
+    imIndicator->setGeometry(130, 90, 25, 25);
+    imLeadCoeff = new QLineEdit(this);
+    imLeadCoeff->setGeometry(160, 90, 25, 25);
+    addLeadCoeffBTN = new QPushButton("Добавить an", this);
+    addLeadCoeffBTN->setGeometry(50, 120, 150, 30);
+    //connect(addLeadCoeffBTN, SIGNAL())
 
-    value_btn = new QPushButton ("знач.",this);
-    value_btn->setGeometry (10,150,60,30) ;
+    calculateValueAtPoint = new QLabel("Вычислить значение в точке x =", this);
+    calculateValueAtPoint->setGeometry(50, 150, 280, 25);
+    valueAtPointLE = new QLineEdit(this);
+    valueAtPointLE->setGeometry(230, 150, 25, 25);
+    calculateValueAtPointBTN = new QPushButton("Вычислить", this);
+    calculateValueAtPointBTN->setGeometry(50, 180, 100, 30);
+    //connect(calculateValueAtPointBTN, SIGNAL())
 
-    root_btn = new QPushButton ("корни", this) ;
-    root_btn->setGeometry (80,150,60,30) ;
+    printWithRootsBTN = new QPushButton("Показать с корнями", this);
+    printWithRootsBTN->setGeometry(50, 250, 220, 30);
+    //connect(printWithRootsBTN, SIGNAL(clicked()), this, SLOT(printWithRoots()));
 
-    print_classic_btn = new QPushButton ("класс. ", this);
-    print_classic_btn->setGeometry (160,150,60,30) ;
+    printCanonBtn = new QPushButton("Показать в каноническом виде", this);
+    printCanonBtn->setGeometry(280, 250, 220, 30);
+    //connect(printCanonBtn, SIGNAL(clicked()), this, SLOT(printWithDegrees()));
 
-    print_canonic_btn = new QPushButton ("канон.",this) ;
-    print_canonic_btn->setGeometry (230,150,60,30) ;
+    outputLabel = new QLabel("Вывод:", this);
+    outputLabel->setGeometry(50, 300, 100, 25);
 
-    output = new QLabel("huy", this);
-    output->setGeometry(10, 200, 280, 25);
-
-    connect(print_canonic_btn, SIGNAL(pressed()), this, SLOT(printWithDegrees()));
-    connect(print_classic_btn, SIGNAL(pressed()), this, SLOT(printWithRoots()));
 }
 
 Tinterface::~Tinterface() {
-    delete name_a;
-    delete delimeter_a;
-    delete a_re;
-    delete a_im;
-
-    delete name_b;
-    delete delimeter_b;
-    delete b_re;
-    delete b_im;
-
-    delete name_c;
-    delete delimeter_c;
-    delete c_re;
-    delete c_im;
-
-    delete name_x;
-    delete delimeter_x;
-    delete x_re;
-    delete x_im;
-
-    delete output;
+    delete outputLabel;
+    delete printCanonBtn;
+    delete printWithRootsBTN;
+    delete calculateValueAtPointBTN;
+    delete valueAtPointLE;
+    delete calculateValueAtPoint;
+    delete addLeadCoeffBTN;
+    delete imLeadCoeff;
+    delete leadingCoeff;
+    delete reLeadCoeff;
+    delete changeRootLineEdit;
+    delete changeRootBTN;
+    delete addRootBTN;
+    delete imCoeffsLE;
+    delete imIndicator;
+    delete reCoeffsLE;
+    delete coeffsLabel;
 }
 
-//void Tinterface::printWithDegrees() {
-//
-//    string output
-//}
+void Tinterface::addRoot(const QLineEdit& re, const QLineEdit& im) {
+//    string real = re.text().toStdString();
+//    string imag = im.text().toStdString();
+//    TComplex root(stod(real), stod(imag));
+//    number *roots = new number;
+//    roots[0] = root;
+//    delete roots;
+}
 
-void Tinterface::value(){
-    output->setText(x_re->text());
+void Tinterface::printWithDegrees() {
+    QString output;
+    std::string out = polynom->polynomWithDegrees();
+    QString::fromStdString(out);
+    outputLabel->setText(output);
+}
+
+void Tinterface::printWithRoots() {
+    QString output;
+    std::string out = polynom->polynomWithRoots();
+    QString::fromStdString(out);
+    outputLabel->setText(output);
 }

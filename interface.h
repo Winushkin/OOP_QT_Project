@@ -1,7 +1,6 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
-#include "iostream"
 #include <QWidget>
 #include <QLabel>
 #include <QLineEdit>
@@ -21,10 +20,14 @@ class Tinterface : public QWidget
     QPushButton *changeRootBTN;
     QLineEdit *changeRootLineEdit;
 
-    QLabel *leadingCoeff; // imIndicator
+    QLabel *leadingCoeff;
     QLineEdit *reLeadCoeff, *imLeadCoeff;
 
     QPushButton *addLeadCoeffBTN;
+
+    QLabel *calculateValueAtPoint;
+    QLineEdit *valueAtPointLE;
+    QPushButton *calculateValueAtPointBTN;
 
     QPushButton *printWithRootsBTN;
     QPushButton *printCanonBtn;
@@ -32,7 +35,7 @@ class Tinterface : public QWidget
     QLabel *outputLabel;
 
 
-
+    Polynom* polynom = new Polynom;
 
 
 
@@ -41,9 +44,10 @@ public:
     ~Tinterface();
 
 public slots:
-    void value();
-//    void printWithDegrees();
-//    void printWithRoots();
+    void addRoot(const QLineEdit& re, const QLineEdit& im);
+
+    void printWithDegrees();
+    void printWithRoots();
 
 
 };
