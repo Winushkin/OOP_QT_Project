@@ -42,6 +42,56 @@ Polynom *Polynom::fill(number leadingCoefficient, number* roots, int rootsCount)
 }
 
 
+std::string Polynom::polynomWithDegrees() {
+    string output = "";
+    output += "p(x) = ";
+    if (*(coefficients) != 0){
+        if(*(coefficients) != 1) output += " (" + (*(coefficients)).to_str() + ") x^" + to_string(degree);
+        else output += "x^" + to_string(degree);
+    }
+    for ( int i = 1; i < degree - 1; i++ ){
+        if (*(coefficients + i) != 0){
+            output += " ";
+            if(*(coefficients + i) > 0) output += "+";
+            if (*(coefficients + i) != 1) output += "(" + (coefficients + i)->to_str() + ") x^" + std::to_string(degree - i);
+            else output += "x^" + std::to_string(degree - i);
+        }
+    }
+    if ( *(coefficients + degree - 1) != 0 ){
+        if(*(coefficients + degree - 1) > 0){
+            output += " + (" + (coefficients + degree - 1)->to_str() + ")x";
+        }else output += " (" + (coefficients + degree - 1)->to_str() + ")x";
+    }
+    if ( *(coefficients + degree) != 0 ){
+        if(*(coefficients + degree) > 0 ) output += " +" ;
+        output += " (" + (coefficients + degree)->to_str() + ")";
+    }
+    return output;
+}
+
+
+
+string Polynom::polynomWithRoots() {
+    string output = "";
+    output += "p(x) = ";
+    if(*(coefficients) != 0) {
+        if(*(coefficients) != 1) output += (coefficients)->to_str();
+        for(int i = 0; i < degree; i++){
+            if(*(roots + i) != 0){
+                if(*(roots + i) > 0) output +=  "(x-" + (roots + i)->to_str() + ")";
+                else {
+                    output +=  "(x+" + (*(roots + i) * -1).to_str() + ")";
+                }
+            }else{
+                output +=  "x";
+            }
+        }
+    }else{
+        output += "0";
+    }
+    return output;
+}
+
 std::ostream &operator<<(std::ostream &os, const Polynom &polynom) {
     os << "p(x) = ";
     if(polynom.roots == nullptr) {

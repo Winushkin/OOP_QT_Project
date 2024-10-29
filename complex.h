@@ -24,6 +24,8 @@ public:
 
     double module(TComplex *complex);
 
+    std::string to_str() const;
+
     TComplex operator+(TComplex &second) const;
 
     TComplex operator-(TComplex &second) const;

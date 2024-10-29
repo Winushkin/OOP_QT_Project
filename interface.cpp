@@ -1,10 +1,10 @@
 #include "interface.h"
-
+#include "polynom.h"
 Tinterface::Tinterface(std::string title, QWidget *parent)
     : QWidget(parent)
 {
     setWindowTitle(QString::fromStdString(title));
-    setFixedSize(700, 250);
+    setFixedSize(700, 400);
 
     name_a = new QLabel("a =",this);
     name_a->setGeometry(50, 20, 30, 25);
@@ -24,7 +24,7 @@ Tinterface::Tinterface(std::string title, QWidget *parent)
     b_im = new QLineEdit("0",this);
     b_im->setGeometry (190,50,50,25);
 
-    name_c = new QLabel("a =",this);
+    name_c = new QLabel("c =",this);
     name_c->setGeometry(50,80,30,25);
     c_re = new QLineEdit("1",this);
     c_re->  setGeometry(90,80,50,25);
@@ -33,7 +33,7 @@ Tinterface::Tinterface(std::string title, QWidget *parent)
     c_im = new QLineEdit("0",this);
     c_im->setGeometry (190,80,50,25);
 
-    name_x = new QLabel("a =",this);
+    name_x = new QLabel("x =",this);
     name_x->setGeometry(50,110, 30, 25);
     x_re = new QLineEdit("1",this);
     x_re->  setGeometry(90,110,50,25);
@@ -44,16 +44,21 @@ Tinterface::Tinterface(std::string title, QWidget *parent)
 
     value_btn = new QPushButton ("знач.",this);
     value_btn->setGeometry (10,150,60,30) ;
+
     root_btn = new QPushButton ("корни", this) ;
     root_btn->setGeometry (80,150,60,30) ;
-    print_classic_btn = new QPushButton ("класс. "
-                                       , this);
+
+    print_classic_btn = new QPushButton ("класс. ", this);
     print_classic_btn->setGeometry (160,150,60,30) ;
+
     print_canonic_btn = new QPushButton ("канон.",this) ;
     print_canonic_btn->setGeometry (230,150,60,30) ;
 
-    output = new QLabel(this);
+    output = new QLabel("huy", this);
     output->setGeometry(10, 200, 280, 25);
+
+    connect(print_canonic_btn, SIGNAL(pressed()), this, SLOT(printWithDegrees()));
+    connect(print_classic_btn, SIGNAL(pressed()), this, SLOT(printWithRoots()));
 }
 
 Tinterface::~Tinterface() {
@@ -76,4 +81,15 @@ Tinterface::~Tinterface() {
     delete delimeter_x;
     delete x_re;
     delete x_im;
+
+    delete output;
+}
+
+//void Tinterface::printWithDegrees() {
+//
+//    string output
+//}
+
+void Tinterface::value(){
+    output->setText(x_re->text());
 }

@@ -14,7 +14,11 @@ public:
 
     void printWithDegrees();
 
+    string polynomWithDegrees();
+
     void printWithRoots();
+
+    string polynomWithRoots();
 
     number valueAtPoint(number point);
 

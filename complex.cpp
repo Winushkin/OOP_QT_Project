@@ -50,6 +50,14 @@ TComplex pow(TComplex complex, double n){
 }
 
 
+std::string TComplex::to_str() const {
+    if ( im < 0 )  return std::to_string(re) + " " + std::to_string(im);
+    else if ( im == 0 ) return std::to_string(re);
+    return std::to_string(re) + " + " + std::to_string(im);
+}
+
+
+
 //Overloads
 TComplex TComplex::operator+(TComplex &second) const{
     return TComplex(re + second.re, im + second.im);

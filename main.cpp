@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
     }
     Tinterface polynom = Tinterface("polynom");
     polynom.show();
-    Tinterface arr = Tinterface("array");
-    arr.show();
+//    Tinterface arr = Tinterface("array");
+//    arr.show();
     return a.exec();
 }

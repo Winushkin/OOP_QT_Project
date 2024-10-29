@@ -13,31 +13,38 @@
 class Tinterface : public QWidget
 {
     Q_OBJECT
-    QLabel *name_a, *delimeter_a;
-    QLineEdit *a_re, *a_im;
+    QLabel *coeffsLabel, *imIndicator;
+    QLineEdit *reCoeffsLE, *imCoeffsLE;
 
-    QLabel *name_b, *delimeter_b;
-    QLineEdit *b_re, *b_im;
+    QPushButton *addRootBTN;
 
-    QLabel *name_c, *delimeter_c;
-    QLineEdit *c_re, *c_im;
+    QPushButton *changeRootBTN;
+    QLineEdit *changeRootLineEdit;
 
-    QLabel *name_x, *delimeter_x;
-    QLineEdit *x_re, *x_im;
+    QLabel *leadingCoeff; // imIndicator
+    QLineEdit *reLeadCoeff, *imLeadCoeff;
 
-    QPushButton *value_btn;
-    QPushButton *root_btn;
-    QPushButton *print_classic_btn;
-    QPushButton *print_canonic_btn;
+    QPushButton *addLeadCoeffBTN;
 
-    QLabel *output;
+    QPushButton *printWithRootsBTN;
+    QPushButton *printCanonBtn;
+
+    QLabel *outputLabel;
+
+
+
+
+
 
 public:
     Tinterface(std::string title, QWidget *parent = nullptr);
     ~Tinterface();
 
-//public slots:
-    // Polynom* fill(number leadingCoefficient, number* roots, int rootsCount);
+public slots:
+    void value();
+//    void printWithDegrees();
+//    void printWithRoots();
+
 
 };
 #endif // INTERFACE_H
