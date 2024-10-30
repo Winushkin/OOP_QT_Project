@@ -6,12 +6,14 @@
 #include <QLineEdit>
 #include <QPushButton>
 
+#include "array.h"
 #include "polynom.h"
 
 
 class Tinterface : public QWidget
 {
     Q_OBJECT
+
     QLabel *coeffsLabel, *imIndicator;
     QLineEdit *reCoeffsLE, *imCoeffsLE;
 
@@ -34,8 +36,9 @@ class Tinterface : public QWidget
 
     QLabel *outputLabel;
 
-
-    Polynom* polynom = new Polynom;
+    Polynom *polynom;
+    number* roots;
+    number An = 0;
 
 
 
@@ -44,9 +47,16 @@ public:
     ~Tinterface();
 
 public slots:
-    void addRoot(const QLineEdit& re, const QLineEdit& im);
+    void addRoot();
+
+    void changeRoot();
+
+    void addLeadCoeff();
+
+    void valueAtPoint();
 
     void printWithDegrees();
+
     void printWithRoots();
 
 

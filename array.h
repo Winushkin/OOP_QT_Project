@@ -19,7 +19,11 @@ public:
 
     int getLength();
 
+    number getElem(int index);
+
     void fill();
+
+    void pushBack(number elem);
 
     bool resize(int length);
 

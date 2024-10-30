@@ -1,5 +1,6 @@
 #include "interface.h"
 #include "polynom.h"
+
 Tinterface::Tinterface(std::string title, QWidget *parent)
     : QWidget(parent)
 {
@@ -51,10 +52,17 @@ Tinterface::Tinterface(std::string title, QWidget *parent)
 
     printCanonBtn = new QPushButton("Показать в каноническом виде", this);
     printCanonBtn->setGeometry(280, 250, 220, 30);
-    //connect(printCanonBtn, SIGNAL(clicked()), this, SLOT(printWithDegrees()));
+//    connect(printCanonBtn, SIGNAL(clicked()), this, SLOT(printWithDegrees()));
 
     outputLabel = new QLabel("Вывод:", this);
     outputLabel->setGeometry(50, 300, 100, 25);
+
+    connect(addRootBTN, SIGNAL(pressed()), this, SLOT(addRoot()));
+    connect(changeRootBTN, SIGNAL(pressed()), this, SLOT(changeRoot()));
+    connect(addLeadCoeffBTN, SIGNAL(pressed()), this, SLOT(addLeadCoeff()));
+    connect(calculateValueAtPointBTN, SIGNAL(pressed()), this, SLOT(addLeadCoeff()));
+    connect(printWithRootsBTN, SIGNAL(pressed()), this, SLOT(printWithRoots()));
+    connect(printCanonBtn, SIGNAL(pressed()), this, SLOT(printWithDegrees()));
 
 }
 
@@ -78,13 +86,42 @@ Tinterface::~Tinterface() {
     delete coeffsLabel;
 }
 
-void Tinterface::addRoot(const QLineEdit& re, const QLineEdit& im) {
-//    string real = re.text().toStdString();
-//    string imag = im.text().toStdString();
-//    TComplex root(stod(real), stod(imag));
-//    number *roots = new number;
-//    roots[0] = root;
-//    delete roots;
+void Tinterface::addRoot() {
+    QLineEdit *re = reCoeffsLE;
+    string real = re->text().toStdString();
+    QLineEdit *im = reCoeffsLE;
+    string imag = im->text().toStdString();
+    TComplex root(stod(real), stod(imag));
+    roots.pushBack(root);
+}
+
+void Tinterface::changeRoot() {
+    int index = changeRootLineEdit->text().toInt();
+    if ( index > 0 && index < roots.getLength() ) {
+        string re = reCoeffsLE->text().toStdString();
+        string im = imCoeffsLE->text().toStdString();
+        number root(stod(re), stod(im));
+        roots.changeElement(index, root);
+    }
+}
+
+
+void Tinterface::addLeadCoeff() {
+    double re = stod(reLeadCoeff->text().toStdString());
+    double im = stod(imLeadCoeff->text().toStdString());
+    An = TComplex(re, im);
+}
+
+void Tinterface::valueAtPoint() {
+    //realization
+}
+
+void Tinterface::printWithRoots() {
+    QString output;
+    polynom = Polynom().fill(An, roots, roots.getLength())
+    std::string out = polynom->polynomWithRoots();
+    QString::fromStdString(out);
+    outputLabel->setText(output);
 }
 
 void Tinterface::printWithDegrees() {
@@ -94,9 +131,4 @@ void Tinterface::printWithDegrees() {
     outputLabel->setText(output);
 }
 
-void Tinterface::printWithRoots() {
-    QString output;
-    std::string out = polynom->polynomWithRoots();
-    QString::fromStdString(out);
-    outputLabel->setText(output);
-}
+

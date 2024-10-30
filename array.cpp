@@ -31,6 +31,7 @@ void Array::fill() {
 }
 
 
+
 bool Array::resize(int newLength) {
     if (newLength < 0){
         return false;
@@ -46,12 +47,23 @@ bool Array::resize(int newLength) {
 }
 
 
+void Array::pushBack(number elem) {
+    resize(getLength() + 1);
+    *(arr + getLength() - 1) = elem;
+}
+
+
 bool Array::changeElement(int index, number value) {
     if(index >= length && index <= 0){
         return false;
     }
     *(arr + index) = value;
     return true;
+}
+
+
+number Array::getElem(int index) {
+    return *(arr + index);
 }
 
 

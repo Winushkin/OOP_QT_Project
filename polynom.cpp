@@ -4,6 +4,28 @@
 Polynom::Polynom(): coefficients(nullptr), roots(nullptr), degree(0) {}
 
 
+string Polynom::polynomWithRoots() {
+    string output = "";
+    output += "p(x) = ";
+    if(*(coefficients) != 0) {
+        if(*(coefficients) != 1) output += (coefficients)->to_str();
+        for(int i = 0; i < degree; i++){
+            if(*(roots + i) != 0){
+                if(*(roots + i) > 0) output +=  "(x-" + (roots + i)->to_str() + ")";
+                else {
+                    output +=  "(x+" + (*(roots + i) * -1).to_str() + ")";
+                }
+            }else{
+                output +=  "x";
+            }
+        }
+    }else{
+        output += "0";
+    }
+    return output;
+}
+
+
 number Polynom::valueAtPoint(number point){
     number sum = 0;
     if(degree == 0) return *(coefficients);
@@ -41,7 +63,6 @@ Polynom *Polynom::fill(number leadingCoefficient, number* roots, int rootsCount)
     return polynom;
 }
 
-
 std::string Polynom::polynomWithDegrees() {
     string output = "";
     output += "p(x) = ";
@@ -69,28 +90,6 @@ std::string Polynom::polynomWithDegrees() {
     return output;
 }
 
-
-
-string Polynom::polynomWithRoots() {
-    string output = "";
-    output += "p(x) = ";
-    if(*(coefficients) != 0) {
-        if(*(coefficients) != 1) output += (coefficients)->to_str();
-        for(int i = 0; i < degree; i++){
-            if(*(roots + i) != 0){
-                if(*(roots + i) > 0) output +=  "(x-" + (roots + i)->to_str() + ")";
-                else {
-                    output +=  "(x+" + (*(roots + i) * -1).to_str() + ")";
-                }
-            }else{
-                output +=  "x";
-            }
-        }
-    }else{
-        output += "0";
-    }
-    return output;
-}
 
 std::ostream &operator<<(std::ostream &os, const Polynom &polynom) {
     os << "p(x) = ";
