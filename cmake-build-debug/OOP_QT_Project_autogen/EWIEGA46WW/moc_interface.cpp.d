@@ -926,6 +926,7 @@
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stdarg_va_list.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/limits.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdarg.h \
+  /Users/kirillbelaev/CLionProjects/OOP_QT_Project/array.h \
   /Users/kirillbelaev/CLionProjects/OOP_QT_Project/complex.h \
   /Users/kirillbelaev/CLionProjects/OOP_QT_Project/number.h \
   /Users/kirillbelaev/CLionProjects/OOP_QT_Project/polynom.h \
