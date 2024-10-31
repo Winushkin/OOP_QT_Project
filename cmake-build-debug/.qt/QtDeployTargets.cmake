@@ -1,2 +1,0 @@
-set(__QT_DEPLOY_TARGET_OOP_QT_Project_FILE /Users/kirillbelaev/CLionProjects/OOP_QT_Project/cmake-build-debug/OOP_QT_Project)
-set(__QT_DEPLOY_TARGET_OOP_QT_Project_TYPE EXECUTABLE)

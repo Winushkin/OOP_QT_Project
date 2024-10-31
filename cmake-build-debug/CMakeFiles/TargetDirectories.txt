@@ -1,5 +1,0 @@
-/Users/kirillbelaev/CLionProjects/OOP_QT_Project/cmake-build-debug/CMakeFiles/OOP_QT_Project.dir
-/Users/kirillbelaev/CLionProjects/OOP_QT_Project/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/kirillbelaev/CLionProjects/OOP_QT_Project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/kirillbelaev/CLionProjects/OOP_QT_Project/cmake-build-debug/CMakeFiles/OOP_QT_Project_autogen_timestamp_deps.dir
-/Users/kirillbelaev/CLionProjects/OOP_QT_Project/cmake-build-debug/CMakeFiles/OOP_QT_Project_autogen.dir
