@@ -30,6 +30,7 @@ class Tinterface : public QWidget
     QLabel *calculateValueAtPoint;
     QLineEdit *valueAtPointLE;
     QPushButton *calculateValueAtPointBTN;
+    QLabel *valueAtPointLabel;
 
     QPushButton *printWithRootsBTN;
     QPushButton *printCanonBtn;
@@ -37,7 +38,8 @@ class Tinterface : public QWidget
     QLabel *outputLabel;
 
     Polynom *polynom;
-    number* roots;
+    number *roots;
+    int rootsAmount;
     number An = 0;
 
 
@@ -45,6 +47,7 @@ class Tinterface : public QWidget
 public:
     Tinterface(std::string title, QWidget *parent = nullptr);
     ~Tinterface();
+    number *pushBack(number *arr, number elem);
 
 public slots:
     void addRoot();

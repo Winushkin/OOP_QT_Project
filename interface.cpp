@@ -18,13 +18,11 @@ Tinterface::Tinterface(std::string title, QWidget *parent)
 
     addRootBTN = new QPushButton("Добавить корень", this);
     addRootBTN->setGeometry(50, 50, 150, 30);
-    //connect(addRootBTN, SIGNAL(clicked(bool)), this, SLOT(addRoot(reCoeffsLE, imCoeffsLE)));
 
     changeRootBTN = new QPushButton("Изменить корень с индексом", this);
     changeRootBTN->setGeometry(250, 50, 200, 30);
     changeRootLineEdit = new QLineEdit(this);
     changeRootLineEdit->setGeometry(455, 50, 30, 30);
-    //connect(changeRootBTN, SIGNAL())
 
     leadingCoeff = new QLabel("an = ", this);
     leadingCoeff->setGeometry(50, 90, 25, 25);
@@ -36,31 +34,29 @@ Tinterface::Tinterface(std::string title, QWidget *parent)
     imLeadCoeff->setGeometry(160, 90, 25, 25);
     addLeadCoeffBTN = new QPushButton("Добавить an", this);
     addLeadCoeffBTN->setGeometry(50, 120, 150, 30);
-    //connect(addLeadCoeffBTN, SIGNAL())
 
     calculateValueAtPoint = new QLabel("Вычислить значение в точке x =", this);
-    calculateValueAtPoint->setGeometry(50, 150, 280, 25);
+    calculateValueAtPoint->setGeometry(50, 150, 250, 25);
     valueAtPointLE = new QLineEdit(this);
-    valueAtPointLE->setGeometry(230, 150, 25, 25);
+    valueAtPointLE->setGeometry(255, 150, 25, 25);
     calculateValueAtPointBTN = new QPushButton("Вычислить", this);
     calculateValueAtPointBTN->setGeometry(50, 180, 100, 30);
-    //connect(calculateValueAtPointBTN, SIGNAL())
+    valueAtPointLabel = new QLabel("dsad", this);
+    valueAtPointLabel->setGeometry(300, 180, 100, 25);
 
     printWithRootsBTN = new QPushButton("Показать с корнями", this);
     printWithRootsBTN->setGeometry(50, 250, 220, 30);
-    //connect(printWithRootsBTN, SIGNAL(clicked()), this, SLOT(printWithRoots()));
 
     printCanonBtn = new QPushButton("Показать в каноническом виде", this);
     printCanonBtn->setGeometry(280, 250, 220, 30);
-//    connect(printCanonBtn, SIGNAL(clicked()), this, SLOT(printWithDegrees()));
 
     outputLabel = new QLabel("Вывод:", this);
-    outputLabel->setGeometry(50, 300, 100, 25);
+    outputLabel->setGeometry(50, 300, 300, 25);
 
     connect(addRootBTN, SIGNAL(pressed()), this, SLOT(addRoot()));
     connect(changeRootBTN, SIGNAL(pressed()), this, SLOT(changeRoot()));
     connect(addLeadCoeffBTN, SIGNAL(pressed()), this, SLOT(addLeadCoeff()));
-    connect(calculateValueAtPointBTN, SIGNAL(pressed()), this, SLOT(addLeadCoeff()));
+    connect(calculateValueAtPointBTN, SIGNAL(pressed()), this, SLOT(valueAtPoint()));
     connect(printWithRootsBTN, SIGNAL(pressed()), this, SLOT(printWithRoots()));
     connect(printCanonBtn, SIGNAL(pressed()), this, SLOT(printWithDegrees()));
 
@@ -86,22 +82,39 @@ Tinterface::~Tinterface() {
     delete coeffsLabel;
 }
 
+
+number *Tinterface::pushBack(number *arr, number elem){
+    number* resizeArr = new number[rootsAmount + 1];
+    for(int i = 0; i < rootsAmount; i++){
+        *(resizeArr + i) = *(arr + i);
+    }
+    rootsAmount++;
+    *(resizeArr + rootsAmount - 1) = elem;
+
+    delete []arr;
+    arr = resizeArr;
+    return arr;
+}
+
+
+
 void Tinterface::addRoot() {
-    QLineEdit *re = reCoeffsLE;
-    string real = re->text().toStdString();
-    QLineEdit *im = reCoeffsLE;
-    string imag = im->text().toStdString();
-    TComplex root(stod(real), stod(imag));
-    roots.pushBack(root);
+    double re = reCoeffsLE->text().toDouble();
+    double im = imCoeffsLE->text().toDouble();
+    number root = TComplex(re, im);
+    if ( rootsAmount == 0 ){
+        roots = new number[0];
+    }
+    roots = pushBack(roots, root);
 }
 
 void Tinterface::changeRoot() {
     int index = changeRootLineEdit->text().toInt();
-    if ( index > 0 && index < roots.getLength() ) {
+    if ( index > 0 && index < rootsAmount ) {
         string re = reCoeffsLE->text().toStdString();
         string im = imCoeffsLE->text().toStdString();
         number root(stod(re), stod(im));
-        roots.changeElement(index, root);
+        roots[index] = root;
     }
 }
 
@@ -113,21 +126,30 @@ void Tinterface::addLeadCoeff() {
 }
 
 void Tinterface::valueAtPoint() {
-    //realization
+    number point = TComplex(valueAtPointLE->text().toDouble());
+    QString output;
+    if ( rootsAmount == 0 ){
+        output = QString::fromStdString(An.to_str());
+    }else{
+        polynom = Polynom().fill(An, roots, rootsAmount);
+        number value = polynom->valueAtPoint(point);
+        output = QString::fromStdString(value.to_str());
+    }
+    valueAtPointLabel->setText(output);
 }
 
 void Tinterface::printWithRoots() {
     QString output;
-    polynom = Polynom().fill(An, roots, roots.getLength())
+    polynom = Polynom().fill(An, roots, rootsAmount);
     std::string out = polynom->polynomWithRoots();
-    QString::fromStdString(out);
+    output = QString::fromStdString(out);
     outputLabel->setText(output);
 }
 
 void Tinterface::printWithDegrees() {
     QString output;
     std::string out = polynom->polynomWithDegrees();
-    QString::fromStdString(out);
+    output = QString::fromStdString(out);
     outputLabel->setText(output);
 }
 
