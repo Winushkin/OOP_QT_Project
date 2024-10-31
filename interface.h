@@ -39,7 +39,7 @@ class Tinterface : public QWidget
 
     Polynom *polynom;
     number *roots;
-    int rootsAmount;
+    int rootsAmount = 0;
     number An = 0;
 
 

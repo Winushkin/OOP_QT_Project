@@ -41,7 +41,7 @@ Tinterface::Tinterface(std::string title, QWidget *parent)
     valueAtPointLE->setGeometry(255, 150, 25, 25);
     calculateValueAtPointBTN = new QPushButton("Вычислить", this);
     calculateValueAtPointBTN->setGeometry(50, 180, 100, 30);
-    valueAtPointLabel = new QLabel("dsad", this);
+    valueAtPointLabel = new QLabel("", this);
     valueAtPointLabel->setGeometry(300, 180, 100, 25);
 
     printWithRootsBTN = new QPushButton("Показать с корнями", this);
@@ -131,7 +131,7 @@ void Tinterface::valueAtPoint() {
     if ( rootsAmount == 0 ){
         output = QString::fromStdString(An.to_str());
     }else{
-        polynom = Polynom().fill(An, roots, rootsAmount);
+        polynom = Polynom().fill(An, roots, rootsAmount + 1);
         number value = polynom->valueAtPoint(point);
         output = QString::fromStdString(value.to_str());
     }
@@ -140,7 +140,7 @@ void Tinterface::valueAtPoint() {
 
 void Tinterface::printWithRoots() {
     QString output;
-    polynom = Polynom().fill(An, roots, rootsAmount);
+    polynom = Polynom().fill(An, roots, rootsAmount + 1);
     std::string out = polynom->polynomWithRoots();
     output = QString::fromStdString(out);
     outputLabel->setText(output);
@@ -148,6 +148,7 @@ void Tinterface::printWithRoots() {
 
 void Tinterface::printWithDegrees() {
     QString output;
+    polynom = Polynom().fill(An, roots, rootsAmount + 1);
     std::string out = polynom->polynomWithDegrees();
     output = QString::fromStdString(out);
     outputLabel->setText(output);
