@@ -4,28 +4,6 @@
 Polynom::Polynom(): coefficients(nullptr), roots(nullptr), degree(0) {}
 
 
-string Polynom::polynomWithRoots() {
-    string output = "";
-    output += "p(x) = ";
-    if(*(coefficients) != 0) {
-        if(*(coefficients) != 1) output += (coefficients)->to_str();
-        for(int i = 0; i < degree; i++){
-            if(*(roots + i) != 0){
-                if(*(roots + i) > 0) output +=  "(x-" + (roots + i)->to_str() + ")";
-                else {
-                    output +=  "(x+" + (*(roots + i) * -1).to_str() + ")";
-                }
-            }else{
-                output +=  "x";
-            }
-        }
-    }else{
-        output += "0";
-    }
-    return output;
-}
-
-
 number Polynom::valueAtPoint(number point){
     number sum = 0;
     if(degree == 0) return *(coefficients);
@@ -63,32 +41,61 @@ Polynom *Polynom::fill(number leadingCoefficient, number* roots, int rootsCount)
     return polynom;
 }
 
-std::string Polynom::polynomWithDegrees() {
-    string output = "";
-    output += "p(x) = ";
+
+ostringstream Polynom::polynomWithRoots() {
+    ostringstream s;
+    s <<  "p(x) = ";
+    if(*(coefficients) != 0) {
+        if(*(coefficients) != 1) s << *(coefficients);
+        for(int i = 0; i < degree; i++){
+            if(*(roots + i) != 0){
+                if (*(roots + i) > 0) {
+                    s << "(x-" << *(roots + i) << ")";
+                } else {
+                    s << "(x+" << (*(roots + i) * -1) << ")";
+                }
+            }else{
+                s << "x";
+            }
+        }
+    }else{
+        s << "0";
+    }
+    return s;
+}
+
+
+ostringstream Polynom::polynomWithDegrees() {
+    ostringstream s;
+    s << "p(x) = ";
+    if(roots == nullptr) {
+        s << *(coefficients);
+        return s;
+    }
     if (*(coefficients) != 0){
-        if(*(coefficients) != 1) output += " (" + (*(coefficients)).to_str() + ") x^" + to_string(degree);
-        else output += "x^" + to_string(degree);
+        if(*(coefficients) != 1) s << " (" << *(coefficients) << ") x^" << degree;
+        else s << "x^" << degree;
     }
     for ( int i = 1; i < degree - 1; i++ ){
         if (*(coefficients + i) != 0){
-            output += " ";
-            if(*(coefficients + i) > 0) output += "+";
-            if (*(coefficients + i) != 1) output += "(" + (coefficients + i)->to_str() + ") x^" + std::to_string(degree - i);
-            else output += "x^" + std::to_string(degree - i);
+            s << " ";
+            if(*(coefficients + i) > 0) s << "+";
+            if (*(coefficients + i) != 1) s << "(" <<  *(coefficients + i) << ") x^" << degree - i;
+            else s << "x^" << degree - i;
         }
     }
     if ( *(coefficients + degree - 1) != 0 ){
         if(*(coefficients + degree - 1) > 0){
-            output += " + (" + (coefficients + degree - 1)->to_str() + ")x";
-        }else output += " (" + (coefficients + degree - 1)->to_str() + ")x";
+            s << " + (" << *(coefficients + degree - 1) << ")x";
+        }else s << " (" << *(coefficients + degree - 1) << ")x";
     }
     if ( *(coefficients + degree) != 0 ){
-        if(*(coefficients + degree) > 0 ) output += " +" ;
-        output += " (" + (coefficients + degree)->to_str() + ")";
+        if(*(coefficients + degree) > 0 ) s << " +" ;
+        s << " (" << *(coefficients + degree) << ")";
     }
-    return output;
+    return s;
 }
+
 
 
 std::ostream &operator<<(std::ostream &os, const Polynom &polynom) {

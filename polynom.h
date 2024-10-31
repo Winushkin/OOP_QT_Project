@@ -2,6 +2,8 @@
 #define OOPPRACTICE_POLYNOM_H
 
 #include "number.h"
+#include <sstream>
+
 
 class Polynom {
     number* roots = nullptr;
@@ -12,13 +14,9 @@ public:
 
     Polynom* fill(number leadingCoefficient, number* roots, int rootsCount);
 
-    void printWithDegrees();
+    ostringstream polynomWithDegrees();
 
-    string polynomWithDegrees();
-
-    void printWithRoots();
-
-    string polynomWithRoots();
+    ostringstream polynomWithRoots();
 
     number valueAtPoint(number point);
 
