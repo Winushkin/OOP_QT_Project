@@ -61,7 +61,9 @@ std::string TComplex::to_str() const {
         s << re;
     }
     s << re << " + " << im << "i";
-    return s.str();
+    string result = s.str();
+    result = result.substr(0, result.length()/2-1);
+    return result;
 }
 
 
