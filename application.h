@@ -1,26 +1,29 @@
-#include "array.h"
-#include "number.h"
-#include "polynom.h"
-
-
 #ifndef OOPPRACTICE_APPLICATION_H
 #define OOPPRACTICE_APPLICATION_H
 
+#include <QObject>
+#include <QApplication>
 
-class Application{
+
+#include "interface.h"
+#include "communicator.h"
+
+
+class TApplication : public QApplication{
+
+    Q_OBJECT
+
+    TCommunicator *comm;
+    Tinterface *interface;
 
 public:
-    Application();
+    TApplication(int, char**);
 
-    void showMenu();
+public slots:
+    void fromCommunicator(QByteArray);
+    void toCommunicator(QString);
 
-    void mainMenu();
 
-    int exec();
-
-    int polynomApp();
-
-    void polynomMenu();
 };
 
 #endif //OOPPRACTICE_APPLICATION_H
