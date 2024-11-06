@@ -1,7 +1,7 @@
 #include "communicator.h"
 
-TCommunicator::TCommunicator(TCommParams& pars, QObject *parent) : QUdpSocket(parent) {
-    params = pars;
+TCommunicator::TCommunicator(TCommParams& params, QObject *parent) : QUdpSocket(parent) {
+    this->params = params;
     ready = bind(params.rHost, params.rPort,
                  QAbstractSocket::ShareAddress | QAbstractSocket::ReuseAddressHint);
     if (ready) connect(this,SIGNAL(readyRead()),this,SLOT(recieve()));
