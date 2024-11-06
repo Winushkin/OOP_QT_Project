@@ -1,10 +1,8 @@
 #include "interface.h"
-#include "polynom.h"
 
-Tinterface::Tinterface(std::string title, QWidget *parent)
-    : QWidget(parent)
-{
-    setWindowTitle(QString::fromStdString(title));
+
+Tinterface::Tinterface(QWidget *parent){
+    setWindowTitle(QString::fromStdString("работа 5 "));
     setFixedSize(700, 400);
 
     coeffsLabel = new QLabel("Коэффициент:", this);
@@ -53,12 +51,10 @@ Tinterface::Tinterface(std::string title, QWidget *parent)
     outputLabel = new QLabel("Вывод:", this);
     outputLabel->setGeometry(50, 300, 300, 25);
 
-    connect(addRootBTN, SIGNAL(pressed()), this, SLOT(addRoot()));
-    connect(changeRootBTN, SIGNAL(pressed()), this, SLOT(changeRoot()));
-    connect(addLeadCoeffBTN, SIGNAL(pressed()), this, SLOT(addLeadCoeff()));
-    connect(calculateValueAtPointBTN, SIGNAL(pressed()), this, SLOT(valueAtPoint()));
-    connect(printWithRootsBTN, SIGNAL(pressed()), this, SLOT(printWithRoots()));
-    connect(printCanonBtn, SIGNAL(pressed()), this, SLOT(printWithDegrees()));
+
+    connect(calculateValueAtPointBTN,SIGNAL(pressed()), this,SLOT(formRequest()));
+    connect(printCanonBtn ,SIGNAL(pressed()), this,SLOT(formRequest()));
+
 
 }
 
@@ -83,94 +79,61 @@ Tinterface::~Tinterface() {
 }
 
 
-number *Tinterface::pushBack(number *arr, number elem){
-    number* resizeArr = new number[rootsAmount + 1];
-    for(int i = 0; i < rootsAmount; i++){
-        *(resizeArr + i) = *(arr + i);
-    }
-    rootsAmount++;
-    *(resizeArr + rootsAmount - 1) = elem;
+void Tinterface::formRequest()
+{
+    QString msg;
+    QPushButton *btn = (QPushButton*)sender();
 
-    delete []arr;
-    arr = resizeArr;
-    return arr;
+    if ( btn == addRootBTN ){
+        msg << QString().setNum(ADD_ROOT_REQUEST);
+        msg << reCoeffsLE->text() << imCoeffsLE->text();
+    }
+    if ( btn == changeRootBTN ) {
+        msg << QString().setNum(CHANGE_ROOT_REQUEST);
+        msg << changeRootLineEdit->text();
+    }
+    if ( btn == addLeadCoeffBTN ){
+        msg << QString().setNum(ADD_COEFFICIENT_REQUEST);
+        msg << reLeadCoeff->text() << imLeadCoeff->text();
+    }
+    if ( btn == calculateValueAtPointBTN ){
+        msg << QString().setNum(VALUE_AT_POINT_REQUEST);
+        msg << valueAtPointLE->text();
+    }
+    if ( btn == printCanonBtn ){
+        msg << QString().setNum(PRINT_CANONIC_REQUEST);
+    }
+    if ( btn == printWithRootsBTN ){
+        msg << QString().setNum(PRINT_CLASSIC_REQUEST);
+    }
+    emit request(msg);
 }
 
+void Tinterface::answer(QString msg)
+{
+    QString text;
+    int p = msg.indexOf(separator);
+    int t = msg.left(p).toInt();
+    msg = msg.mid(p+1,msg.length()-p-1);
 
+    switch (t)
+    {
+        case VALUE_AT_POINT_ANSWER:
+            text = "p";
+            p = msg.indexOf(separator);
+            text += msg.left(p);
+            text += " = ";
+            text += msg.right(msg.length()-p-1);
+            valueAtPointLabel->setText(text);
+            break;
 
-void Tinterface::addRoot() {
-    if ( reCoeffsLE->text() == "" || imCoeffsLE->text() == "" ){
-        outputLabel->setText("Неправильно введено число");
-    }else{
-        double re = reCoeffsLE->text().toDouble();
-        double im = imCoeffsLE->text().toDouble();
-        number root = TComplex(re, im);
-        if ( rootsAmount == 0 ){
-            roots = new number[0];
-        }
-        roots = pushBack(roots, root);
-        polynom = Polynom().fill(An, roots, rootsAmount+1);
-    }
+        case PRINT_POLYNOM_ANSWER:
+            text = "p(x) = ";
+            text += msg;
+            outputLabel->setText(text);
+            break;
 
-}
-
-void Tinterface::changeRoot() {
-    if (changeRootLineEdit->text() == ""){
-        outputLabel->setText("Неправильно введен индекс");
-    }else{
-        int index = changeRootLineEdit->text().toInt();
-        if ( index >= 0 && index < rootsAmount ) {
-            double re = reCoeffsLE->text().toDouble();
-            double im = imCoeffsLE->text().toDouble();
-            number root(re, im);
-            roots[index] = root;
-            polynom = Polynom().fill(An, roots, rootsAmount+1);
-        }else{
-            outputLabel->setText("Неправильно введен индекс");
-        }
-    }
-}
-
-
-void Tinterface::addLeadCoeff() {
-    if ( reLeadCoeff->text() == " " || imLeadCoeff->text() == "" ){
-        outputLabel->setText("Неправильно введено число");
-    }else{
-        double re = reLeadCoeff->text().toDouble();
-        double im = imLeadCoeff->text().toDouble();
-        An = TComplex(re, im);
-        polynom = Polynom().fill(An, roots, rootsAmount+1);
-    }
-}
-
-void Tinterface::valueAtPoint() {
-    if ( valueAtPointLE->text() == ""){
-        outputLabel->setText("Неправильно введено число");
-    }else{
-        number point = TComplex(valueAtPointLE->text().toDouble());
-        QString output;
-        if ( rootsAmount == 0 ){
-            output = QString::fromStdString(An.to_str());
-        }else{
-            number value = polynom->valueAtPoint(point);
-            output = QString::fromStdString(value.to_str());
-        }
-        valueAtPointLabel->setText(output);
+        default:
+            break;
     }
 }
-
-void Tinterface::printWithDegrees() {
-    QString output;
-    std::string out = polynom->polynomWithDegrees().str();
-    output = QString::fromStdString(out);
-    outputLabel->setText(output);
-}
-
-void Tinterface::printWithRoots() {
-    QString output;
-    string out = polynom->polynomWithRoots().str();
-    output = QString::fromStdString(out);
-    outputLabel->setText(output);
-}
-
-

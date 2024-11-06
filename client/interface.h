@@ -9,6 +9,9 @@
 #include "../server/array.h"
 #include "../server/number.h"
 #include "../server/polynom.h"
+#include "../common/common.h"
+#include "../common/common.cpp"
+
 
 
 class Tinterface : public QWidget
@@ -43,26 +46,23 @@ class Tinterface : public QWidget
     int rootsAmount = 0;
     number An = 0;
 
+    friend QString& operator<< (QString&,const QString&);
 
 
 public:
-    Tinterface(std::string title, QWidget *parent = nullptr);
+    Tinterface(QWidget *parent = 0);
     ~Tinterface();
-    number *pushBack(number *arr, number elem);
 
 public slots:
-    void addRoot();
+    void answer(QString);
 
-    void changeRoot();
+private slots:
+    void formRequest();
 
-    void addLeadCoeff();
-
-    void valueAtPoint();
-
-    void printWithDegrees();
-
-    void printWithRoots();
-
+signals:
+    void request(QString);
 
 };
+
 #endif // INTERFACE_H
+
