@@ -76,6 +76,8 @@ public:
     friend TComplex pow(TComplex complex, double n);
     friend istream& operator >> (istream & in, TComplex & c);
     friend ostream& operator << (ostream & os, const TComplex & c);
+    friend QByteArray& operator>>(QByteArray&,TComplex&);
+
 };
 
 

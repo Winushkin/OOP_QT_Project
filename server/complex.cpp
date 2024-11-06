@@ -246,3 +246,14 @@ TComplex::operator QString() { // added in 5
     s += "i)";
     return s;
 }
+
+QByteArray &operator>>(QByteArray &arr, TComplex &c) {
+    int p = arr.indexOf(TComplex::SEPARATOR.toLatin1());
+    p = arr.indexOf(TComplex::SEPARATOR.toLatin1(),p+1);
+    if (p > 0)
+    {
+        c = TComplex(arr.left(p));
+        arr = arr.right(arr.length()-p-1);
+    }
+    return arr;
+}
