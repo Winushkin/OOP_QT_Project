@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cmath>
+#include <QString>
 using namespace std;
 
 
@@ -9,12 +11,15 @@ using namespace std;
 class TComplex{
     double re;
     double im;
+    static QChar SEPARATOR; //added in 5
 
 public:
 
     TComplex();
 
     TComplex(double re, double im);
+
+    TComplex(const QByteArray&); //added in 5
 
     TComplex(double re);
 
@@ -64,6 +69,9 @@ public:
 
     bool operator==(int second) const;
 
+    static void setSeparator(QChar);//added in 5
+
+    operator QString ();//added in 5
 
     friend TComplex pow(TComplex complex, double n);
     friend istream& operator >> (istream & in, TComplex & c);

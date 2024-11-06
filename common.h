@@ -1,7 +1,7 @@
 #include <QString>
 
-#ifndef OOP_QT_PROJECT_LOCALNEW_COMMON_H
-#define OOP_QT_PROJECT_LOCALNEW_COMMON_H
+#ifndef OOP_QT_PROJECT_COMMON_H
+#define OOP_QT_PROJECT_COMMON_H
 
 
 enum massages {

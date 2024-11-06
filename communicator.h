@@ -3,8 +3,8 @@
 
 #include <QtNetwork/QUdpSocket>
 #include <QtNetwork/QHostAddress>
-#ifndef OOP_QT_PROJECT_LOCALNEW_COMMUNICATOR_H
-#define OOP_QT_PROJECT_LOCALNEW_COMMUNICATOR_H
+#ifndef OOP_QT_PROJECT_COMMUNICATOR_H
+#define OOP_QT_PROJECT_COMMUNICATOR_H
 
 
 struct TCommParams
@@ -34,7 +34,6 @@ public slots:
 
 private slots:
     void recieve();
-
 };
 
 

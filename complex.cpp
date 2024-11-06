@@ -227,3 +227,22 @@ bool TComplex::operator>(int second) {
     }
     return false;
 }
+
+TComplex::TComplex(const QByteArray &arr) { //added in 5
+    int p = arr.indexOf(SEPARATOR.toLatin1());
+    re = arr.left(p).toDouble();
+    im = arr.right(arr.length()-p-1).toDouble();
+}
+
+void TComplex::setSeparator(QChar ch) { //added in 5
+    SEPARATOR = ch;
+}
+
+TComplex::operator QString() { // added in 5
+    QString s = "(";
+    s += QString().setNum(re);
+    s += "+";
+    s += QString().setNum(im);
+    s += "i)";
+    return s;
+}
