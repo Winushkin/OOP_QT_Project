@@ -5,11 +5,10 @@
 
 #include "../common/communicator.h"
 #include "../common/common.h"
-#include "../common/common.cpp"
 
 
 
-class TApplication : public QCoreApplication
+class ServerApplication : public QCoreApplication
 {
 Q_OBJECT
 
@@ -17,7 +16,7 @@ Q_OBJECT
 
 public:
 
-    TApplication(int, char**);
+    ServerApplication(int, char**);
 
 signals:
 

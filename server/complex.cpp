@@ -1,8 +1,8 @@
 #include "complex.h"
 #include "number.h"
-#include <iostream>
 #include <sstream>
 
+QChar TComplex::SEPARATOR = ',';
 
 using namespace std;
 

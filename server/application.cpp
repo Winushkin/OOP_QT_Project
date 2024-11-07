@@ -1,7 +1,7 @@
 #include "application.h"
 #include "polynom.h"
 
-TApplication::TApplication(int argc, char *argv[])
+ServerApplication::ServerApplication(int argc, char *argv[])
         : QCoreApplication(argc,argv)
 {
     TCommParams pars = { QHostAddress("127.0.0.1"), 10000,
@@ -12,7 +12,7 @@ TApplication::TApplication(int argc, char *argv[])
 }
 
 
-void TApplication::recieve(QByteArray msg){
+void ServerApplication::recieve(QByteArray msg){
     QString answer, s;
     TComplex complex;
     msg >> complex;

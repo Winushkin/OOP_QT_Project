@@ -1,7 +1,7 @@
 #include "application.h"
 
 
-TApplication::TApplication(int argc, char *argv[])
+ClientApplication::ClientApplication(int argc, char *argv[])
         : QApplication(argc,argv)
 {
     TCommParams pars = { QHostAddress("127.0.0.1"), 10001,
@@ -18,12 +18,12 @@ TApplication::TApplication(int argc, char *argv[])
 
 }
 
-void TApplication::fromCommunicator(QByteArray msg)
+void ClientApplication::fromCommunicator(QByteArray msg)
 {
     interface->answer(QString(msg));
 }
 
-void TApplication::toCommunicator(QString msg)
+void ClientApplication::toCommunicator(QString msg)
 {
     comm->send(QByteArray().append(msg.toUtf8()));
 }

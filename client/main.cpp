@@ -16,6 +16,6 @@ int main(int argc, char *argv[]) {
 //            break;
 //        }
 //    }
-    TApplication a(argc, argv);
+    ClientApplication a(argc, argv);
     return a.exec();
 }

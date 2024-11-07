@@ -10,8 +10,6 @@
 #include "../server/number.h"
 #include "../server/polynom.h"
 #include "../common/common.h"
-#include "../common/common.cpp"
-
 
 
 class Tinterface : public QWidget
@@ -40,11 +38,6 @@ class Tinterface : public QWidget
     QPushButton *printCanonBtn;
 
     QLabel *outputLabel;
-
-    Polynom *polynom;
-    number *roots;
-    int rootsAmount = 0;
-    number An = 0;
 
     friend QString& operator<< (QString&,const QString&);
 

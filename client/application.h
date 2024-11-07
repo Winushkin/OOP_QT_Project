@@ -9,7 +9,7 @@
 #include "../common/communicator.h"
 
 
-class TApplication : public QApplication{
+class ClientApplication : public QApplication{
 
     Q_OBJECT
 
@@ -17,7 +17,7 @@ class TApplication : public QApplication{
     Tinterface *interface;
 
 public:
-    TApplication(int, char**);
+    ClientApplication(int, char**);
 
 public slots:
     void fromCommunicator(QByteArray);
