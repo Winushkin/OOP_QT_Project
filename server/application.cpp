@@ -22,17 +22,24 @@ void TApplication::recieve(QByteArray msg){
     switch (t) {
         case PRINT_CLASSIC_REQUEST:
             break;
+
         case PRINT_CANONIC_REQUEST:
             break;
+
         case ADD_ROOT_REQUEST:
             break;
+
         case ADD_COEFFICIENT_REQUEST:
             break;
+
         case CHANGE_ROOT_REQUEST:
             break;
+
         case VALUE_AT_POINT_REQUEST:
             break;
-        default: return;
+
+        default:
+            return;
     }
     comm->send(QByteArray().append(answer.toLatin1()));
 }

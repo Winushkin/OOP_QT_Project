@@ -8,7 +8,7 @@ TApplication::TApplication(int argc, char *argv[])
                          QHostAddress("127.0.0.1"), 10000};
     comm = new TCommunicator(pars, this);
 
-    interface = new TInterface();
+    interface = new Tinterface();
     interface->show();
 
     connect(comm,SIGNAL(recieved(QByteArray)),this,
@@ -25,5 +25,5 @@ void TApplication::fromCommunicator(QByteArray msg)
 
 void TApplication::toCommunicator(QString msg)
 {
-    comm->send(QByteArray().append(msg));
+    comm->send(QByteArray().append(msg.toUtf8()));
 }

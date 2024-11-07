@@ -22,8 +22,6 @@ public:
 public slots:
     void fromCommunicator(QByteArray);
     void toCommunicator(QString);
-
-
 };
 
 #endif //OOPPRACTICE_APPLICATION_H
