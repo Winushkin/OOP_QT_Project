@@ -23,10 +23,11 @@ ServerApplication::ServerApplication(int argc, char *argv[]): QCoreApplication(a
 
 
 void ServerApplication::recieve(QByteArray msg) {
-    QString answer;
+    QString answer, submsg;
     std::string out;
+    number root;
     TComplex complex;
-
+    int index;
     int pos = msg.indexOf(separator.toLatin1());
     int t = msg.left(pos).toInt();
     switch (t) {
@@ -40,7 +41,7 @@ void ServerApplication::recieve(QByteArray msg) {
             break;
         case ADD_ROOT_REQUEST:
             msg >> complex;
-            number root = complex;
+            root = complex;
             if ( rootsAmount == 0 ){
                 roots = new number[0];
             }
@@ -53,17 +54,11 @@ void ServerApplication::recieve(QByteArray msg) {
             polynom = Polynom().fill(An, roots, rootsAmount+1);
             break;
         case CHANGE_ROOT_REQUEST:
-            msg.erase(msg.cend());
-            int index = msg.toInt();
-            if ( index >= 0 && index < rootsAmount ) {
-                double re = reCoeffsLE->text().toDouble();
-                double im = imCoeffsLE->text().toDouble();
-                number root(re, im);
-                roots[index] = root;
-                polynom = Polynom().fill(An, roots, rootsAmount+1);
-            }else{
-                outputLabel->setText("Неправильно введен индекс");
-            }
+            pos = msg.indexOf(separator.toLatin1())
+            pos = msg.indexOf(separator.toLatin1())
+            index = msg.toInt();
+            roots[index] = root;
+            polynom = Polynom().fill(An, roots, rootsAmount+1);
             break;
         case VALUE_AT_POINT_REQUEST:
             break;
