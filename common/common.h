@@ -8,7 +8,7 @@
 const QChar separator(';');
 
 QString& operator<< (QString& m, const QString& s);
-
+const QChar separator(';');
 enum massages {
     PRINT_CLASSIC_REQUEST,
     PRINT_CANONIC_REQUEST,
