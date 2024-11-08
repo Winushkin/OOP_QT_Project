@@ -93,7 +93,9 @@ ostringstream Polynom::polynomWithDegrees() {
         if(*(coefficients + degree) > 0 ) s << " +" ;
         s << " (" << *(coefficients + degree) << ")";
     }
+
     return s;
+
 }
 
 

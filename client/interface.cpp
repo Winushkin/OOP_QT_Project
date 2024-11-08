@@ -1,6 +1,5 @@
 #include "interface.h"
 
-
 Tinterface::Tinterface(QWidget *parent){
     setWindowTitle(QString::fromStdString("работа 5 "));
     setFixedSize(700, 400);
@@ -91,6 +90,7 @@ void Tinterface::formRequest()
     if ( btn == changeRootBTN ) {
         msg << QString().setNum(CHANGE_ROOT_REQUEST);
         msg << changeRootLineEdit->text();
+        msg << reCoeffsLE->text() << imCoeffsLE->text();
     }
     if ( btn == addLeadCoeffBTN ){
         msg << QString().setNum(ADD_COEFFICIENT_REQUEST);
@@ -116,24 +116,22 @@ void Tinterface::answer(QString msg)
     int t = msg.left(p).toInt();
     msg = msg.mid(p+1,msg.length()-p-1);
 
+    p = msg.indexOf(separator);
+    text = msg.left(p);
     switch (t)
     {
         case VALUE_AT_POINT_ANSWER:
-            text = "p";
-            p = msg.indexOf(separator);
-            text += msg.left(p);
-            text += " = ";
-            text += msg.right(msg.length()-p-1);
             valueAtPointLabel->setText(text);
             break;
 
         case PRINT_POLYNOM_ANSWER:
-            text = "p(x) = ";
-            text += msg;
             outputLabel->setText(text);
             break;
 
         default:
             break;
     }
+
+    msg = msg.mid(p+1,msg.length()-p-1);
+
 }
