@@ -36,13 +36,15 @@ void ServerApplication::recieve(QByteArray msg) {
     msg.remove(0, 2);
     switch (t) {
         case PRINT_CLASSIC_REQUEST:
+            answer << QString().setNum(PRINT_POLYNOM_ANSWER);
             out = polynom->polynomWithRoots().str();
-            answer = QString::fromStdString(out);
+            answer << QString::fromStdString(out);
             break;
 
         case PRINT_CANONIC_REQUEST:
+            answer << QString().setNum(PRINT_POLYNOM_ANSWER);
             out = polynom->polynomWithDegrees().str();
-            answer = QString::fromStdString(out);
+            answer << QString::fromStdString(out);
             break;
 
         case ADD_ROOT_REQUEST:
