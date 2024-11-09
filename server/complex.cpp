@@ -2,7 +2,7 @@
 #include "number.h"
 #include <sstream>
 
-QChar TComplex::SEPARATOR = ',';
+QChar TComplex::SEPARATOR = ';';
 
 using namespace std;
 

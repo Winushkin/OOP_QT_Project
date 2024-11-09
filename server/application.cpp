@@ -33,7 +33,7 @@ void ServerApplication::recieve(QByteArray msg) {
     int index;
     int pos = msg.indexOf(separator.toLatin1());
     int t = msg.left(pos).toInt();
-    msg.remove(0, pos);
+    msg.remove(0, 2);
     switch (t) {
         case PRINT_CLASSIC_REQUEST:
             out = polynom->polynomWithRoots().str();
