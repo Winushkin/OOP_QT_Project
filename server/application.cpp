@@ -70,12 +70,13 @@ void ServerApplication::recieve(QByteArray msg) {
             polynom = Polynom().fill(An, roots, rootsAmount+1);
             break;
         case VALUE_AT_POINT_REQUEST:
+            answer << QString().setNum(VALUE_AT_POINT_ANSWER);
             msg >> point;
             if ( rootsAmount == 0 ){
                 answer = QString::fromStdString(An.to_str());
             }else{
                 number value = polynom->valueAtPoint(point);
-                answer = QString::fromStdString(value.to_str());
+                answer << QString::fromStdString(value.to_str());
             }
             break;
         default:
