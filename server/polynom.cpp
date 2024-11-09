@@ -72,23 +72,35 @@ ostringstream Polynom::polynomWithDegrees() {
         s << *(coefficients);
         return s;
     }
-    if (*(coefficients) != 0){
-        if(*(coefficients) != 1) s << " (" << *(coefficients) << ") x^" << degree;
-        else s << "x^" << degree;
+
+    if ( degree != 1){
+        if (*(coefficients) != 0){
+            if(*(coefficients) != 1) s << " (" << *(coefficients) << ") x^" << degree;
+            else s << "x^" << degree;
+        }
+
+        for ( int i = 1; i < degree - 1; i++ ){
+            if (*(coefficients + i) != 0){
+                s << " ";
+                if(*(coefficients + i) > 0) s << "+";
+                if (*(coefficients + i) != 1) s << "(" <<  *(coefficients + i) << ") x^" << degree - i;
+                else s << "x^" << degree - i;
+            }
+        }
+
     }
-    for ( int i = 1; i < degree - 1; i++ ){
-        if (*(coefficients + i) != 0){
-            s << " ";
-            if(*(coefficients + i) > 0) s << "+";
-            if (*(coefficients + i) != 1) s << "(" <<  *(coefficients + i) << ") x^" << degree - i;
-            else s << "x^" << degree - i;
+    if ( degree == 1){
+        if ( *(coefficients + degree - 1) != 0 ){
+            s << "  (" << *(coefficients + degree - 1) << ")x";
+        }
+    }else{
+        if ( *(coefficients + degree - 1) != 0 ){
+            if(*(coefficients + degree - 1) > 0){
+                s << " + (" << *(coefficients + degree - 1) << ")x";
+            }else s << " (" << *(coefficients + degree - 1) << ")x";
         }
     }
-    if ( *(coefficients + degree - 1) != 0 ){
-        if(*(coefficients + degree - 1) > 0){
-            s << " + (" << *(coefficients + degree - 1) << ")x";
-        }else s << " (" << *(coefficients + degree - 1) << ")x";
-    }
+
     if ( *(coefficients + degree) != 0 ){
         if(*(coefficients + degree) > 0 ) s << " +" ;
         s << " (" << *(coefficients + degree) << ")";
