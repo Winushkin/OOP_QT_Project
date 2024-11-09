@@ -64,9 +64,9 @@ void ServerApplication::recieve(QByteArray msg) {
         case CHANGE_ROOT_REQUEST:
             pos = msg.indexOf(separator.toLatin1());
             index = msg.left(pos).toInt();
-            msg.remove(0, pos);
+            msg.remove(0, pos + 1);
             msg >> complex;
-            roots[index] = root;
+            roots[index] = complex;
             polynom = Polynom().fill(An, roots, rootsAmount+1);
             break;
         case VALUE_AT_POINT_REQUEST:
