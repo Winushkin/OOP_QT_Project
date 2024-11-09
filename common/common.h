@@ -5,9 +5,10 @@
 #ifndef OOP_QT_PROJECT_COMMON_H
 #define OOP_QT_PROJECT_COMMON_H
 
+const QChar separator(';');
 
 QString& operator<< (QString& m, const QString& s);
-const QChar separator(';');
+
 enum massages {
     PRINT_CLASSIC_REQUEST,
     PRINT_CANONIC_REQUEST,
