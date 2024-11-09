@@ -5,7 +5,6 @@
 #ifndef OOP_QT_PROJECT_COMMON_H
 #define OOP_QT_PROJECT_COMMON_H
 
-const QChar separator(';');
 
 QString& operator<< (QString& m, const QString& s);
 const QChar separator(';');

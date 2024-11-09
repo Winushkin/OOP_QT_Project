@@ -23,13 +23,15 @@ ServerApplication::ServerApplication(int argc, char *argv[]): QCoreApplication(a
 
 
 void ServerApplication::recieve(QByteArray msg) {
-    QString answer, submsg;
+    QString answer = "";
     std::string out;
     number root;
     TComplex complex;
+    number point;
     int index;
     int pos = msg.indexOf(separator.toLatin1());
     int t = msg.left(pos).toInt();
+    msg.remove(0, pos);
     switch (t) {
         case PRINT_CLASSIC_REQUEST:
             out = polynom->polynomWithDegrees().str();
@@ -54,13 +56,21 @@ void ServerApplication::recieve(QByteArray msg) {
             polynom = Polynom().fill(An, roots, rootsAmount+1);
             break;
         case CHANGE_ROOT_REQUEST:
-            pos = msg.indexOf(separator.toLatin1())
-            pos = msg.indexOf(separator.toLatin1())
-            index = msg.toInt();
+            pos = msg.indexOf(separator.toLatin1());
+            index = msg.left(pos).toInt();
+            msg.remove(0, pos);
+            msg >> complex;
             roots[index] = root;
             polynom = Polynom().fill(An, roots, rootsAmount+1);
             break;
         case VALUE_AT_POINT_REQUEST:
+            msg >> point;
+            if ( rootsAmount == 0 ){
+                answer = QString::fromStdString(An.to_str());
+            }else{
+                number value = polynom->valueAtPoint(point);
+                answer = QString::fromStdString(value.to_str());
+            }
             break;
         default:
             return;
