@@ -10,7 +10,6 @@
 
 
 class ClientApplication : public QApplication{
-
     Q_OBJECT
 
     TCommunicator *comm;

@@ -50,9 +50,11 @@ Tinterface::Tinterface(QWidget *parent){
     outputLabel = new QLabel("Вывод:", this);
     outputLabel->setGeometry(50, 300, 300, 25);
 
-
+    connect(addRootBTN,SIGNAL(pressed()), this,SLOT(formRequest()));
+    connect(addLeadCoeffBTN,SIGNAL(pressed()), this,SLOT(formRequest()));
     connect(calculateValueAtPointBTN,SIGNAL(pressed()), this,SLOT(formRequest()));
     connect(printCanonBtn ,SIGNAL(pressed()), this,SLOT(formRequest()));
+    connect(printWithRootsBTN ,SIGNAL(pressed()), this,SLOT(formRequest()));
 
 
 }
