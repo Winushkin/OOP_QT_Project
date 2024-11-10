@@ -6,11 +6,11 @@ Tinterface::Tinterface(QWidget *parent){
 
     coeffsLabel = new QLabel("Коэффициент:", this);
     coeffsLabel->setGeometry(50, 20, 100, 25);
-    reCoeffsLE = new QLineEdit("0", this);
+    reCoeffsLE = new QLineEdit("", this);
     reCoeffsLE->setGeometry(150, 20, 25, 25);
     imIndicator = new QLabel("+i", this);
     imIndicator->setGeometry(180, 20, 25, 25);
-    imCoeffsLE = new QLineEdit("0", this);
+    imCoeffsLE = new QLineEdit("", this);
     imCoeffsLE->setGeometry(210, 20, 25, 25);
 
     addRootBTN = new QPushButton("Добавить корень", this);
@@ -34,8 +34,12 @@ Tinterface::Tinterface(QWidget *parent){
 
     calculateValueAtPoint = new QLabel("Вычислить значение в точке x =", this);
     calculateValueAtPoint->setGeometry(50, 150, 250, 25);
-    valueAtPointLE = new QLineEdit(this);
-    valueAtPointLE->setGeometry(255, 150, 25, 25);
+    valueAtPointReLe = new QLineEdit(this);
+    valueAtPointReLe->setGeometry(255, 150, 25, 25);
+    imIndicator = new QLabel("+i", this);
+    imIndicator->setGeometry(285, 150, 25, 25);
+    valueAtPointImLe = new QLineEdit(this);
+    valueAtPointImLe->setGeometry(305, 150, 25, 25);
     calculateValueAtPointBTN = new QPushButton("Вычислить", this);
     calculateValueAtPointBTN->setGeometry(50, 180, 100, 30);
     valueAtPointLabel = new QLabel("", this);
@@ -56,8 +60,6 @@ Tinterface::Tinterface(QWidget *parent){
     connect(printCanonBtn ,SIGNAL(pressed()), this,SLOT(formRequest()));
     connect(printWithRootsBTN ,SIGNAL(pressed()), this,SLOT(formRequest()));
     connect(changeRootBTN ,SIGNAL(pressed()), this,SLOT(formRequest()));
-
-
 }
 
 Tinterface::~Tinterface() {
@@ -65,7 +67,8 @@ Tinterface::~Tinterface() {
     delete printCanonBtn;
     delete printWithRootsBTN;
     delete calculateValueAtPointBTN;
-    delete valueAtPointLE;
+    delete valueAtPointReLe;
+    delete valueAtPointImLe;
     delete calculateValueAtPoint;
     delete addLeadCoeffBTN;
     delete imLeadCoeff;
@@ -87,21 +90,29 @@ void Tinterface::formRequest()
     QPushButton *btn = (QPushButton*)sender();
 
     if ( btn == addRootBTN ){
+        if (reCoeffsLE->text() == "") reCoeffsLE->setText("0");
+        if (imCoeffsLE->text() == "") imCoeffsLE->setText("0");
         msg << QString().setNum(ADD_ROOT_REQUEST);
         msg << reCoeffsLE->text() << imCoeffsLE->text();
     }
     if ( btn == changeRootBTN ) {
+        if (reCoeffsLE->text() == "") reCoeffsLE->setText("0");
+        if (imCoeffsLE->text() == "") imCoeffsLE->setText("0");
         msg << QString().setNum(CHANGE_ROOT_REQUEST);
         msg << changeRootLineEdit->text();
         msg << reCoeffsLE->text() << imCoeffsLE->text();
     }
     if ( btn == addLeadCoeffBTN ){
+        if (reLeadCoeff->text() == "") reLeadCoeff->setText("0");
+        if (imLeadCoeff->text() == "") imLeadCoeff->setText("0");
         msg << QString().setNum(ADD_COEFFICIENT_REQUEST);
         msg << reLeadCoeff->text() << imLeadCoeff->text();
     }
     if ( btn == calculateValueAtPointBTN ){
+        if (valueAtPointReLe->text() == "") valueAtPointReLe->setText("0");
+        if (valueAtPointImLe->text() == "") valueAtPointImLe->setText("0");
         msg << QString().setNum(VALUE_AT_POINT_REQUEST);
-        msg << valueAtPointLE->text();
+        msg << valueAtPointReLe->text() <<valueAtPointImLe->text();
     }
     if ( btn == printCanonBtn ){
         msg << QString().setNum(PRINT_CANONIC_REQUEST);

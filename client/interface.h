@@ -30,7 +30,8 @@ class Tinterface : public QWidget
     QPushButton *addLeadCoeffBTN;
 
     QLabel *calculateValueAtPoint;
-    QLineEdit *valueAtPointLE;
+    QLineEdit *valueAtPointReLe;
+    QLineEdit *valueAtPointImLe;
     QPushButton *calculateValueAtPointBTN;
     QLabel *valueAtPointLabel;
 
