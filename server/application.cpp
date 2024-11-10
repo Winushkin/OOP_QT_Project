@@ -28,7 +28,6 @@ void ServerApplication::recieve(QByteArray msg) {
     number root;
     TComplex complex;
     number point;
-//    QString message = QString(msg);
 
     int index;
     int pos = msg.indexOf(separator.toLatin1());
