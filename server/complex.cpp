@@ -59,10 +59,10 @@ std::string TComplex::to_str() const {
     }
     else if ( im == 0 ) {
         s << re;
+    }else{
+        s << re << " + " << im << "i";
     }
-    s << re << " + " << im << "i";
     string result = s.str();
-    result = result.substr(0, result.length()/2-1);
     return result;
 }
 
