@@ -71,8 +71,9 @@ void ServerApplication::recieve(QByteArray msg) {
         case VALUE_AT_POINT_REQUEST:
             answer << QString().setNum(VALUE_AT_POINT_ANSWER);
             msg >> point;
+            answer += "p(" + point.to_str() + ") = ";
             if ( rootsAmount == 0 ){
-                answer = QString::fromStdString(An.to_str());
+                answer << QString::fromStdString(An.to_str());
             }else{
                 number value = polynom->valueAtPoint(point);
                 answer << QString::fromStdString(value.to_str());
