@@ -1,4 +1,6 @@
 #include "application.h"
+#include "complex.h"
+#include "polynom.h"
 
 number* ServerApplication::pushBack(number *arr, number elem){
     number* resizeArr = new number[rootsAmount + 1];
@@ -28,10 +30,12 @@ void ServerApplication::recieve(QByteArray msg) {
     number root;
     TComplex complex;
     number point;
-
-    int index;
     int pos = msg.indexOf(separator.toLatin1());
-    int t = msg.left(pos).toInt();
+    int t, mode = msg.left(pos).toInt();
+    msg = msg.right(msg.length() - pos - 1);
+    int index;
+    pos = msg.indexOf(separator.toLatin1());
+    t = msg.left(pos).toInt();
     msg.remove(0, 2);
     switch (t) {
         case PRINT_CLASSIC_REQUEST:
