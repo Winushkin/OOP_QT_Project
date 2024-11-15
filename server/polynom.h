@@ -1,7 +1,8 @@
 #ifndef OOPPRACTICE_POLYNOM_H
 #define OOPPRACTICE_POLYNOM_H
-
+#include "iostream"
 #include <sstream>
+using namespace std;
 
 template <class number>
 class Polynom {
@@ -21,6 +22,8 @@ public:
 
     template <class T>
     friend ostream& operator << (ostream & os, const Polynom<T> & c);
+
+    Polynom<number> *fill(number leadingCoefficient, number *roots, int rootsCount);
 };
 
 template <class number>
