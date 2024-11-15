@@ -1,7 +1,7 @@
 #include "interface.h"
 
 Tinterface::Tinterface(QWidget *parent){
-    setWindowTitle(QString::fromStdString("работа 5 "));
+    setWindowTitle(QString::fromStdString("работа 6 "));
     setFixedSize(700, 400);
 
     coeffsLabel = new QLabel("Коэффициент:", this);
@@ -51,6 +51,13 @@ Tinterface::Tinterface(QWidget *parent){
     printCanonBtn = new QPushButton("Показать в каноническом виде", this);
     printCanonBtn->setGeometry(280, 250, 220, 30);
 
+    RealMode = new QRadioButton("Вещественные числа", this);
+    RealMode->setGeometry(50, 275, 200, 25);
+    ComplexMode = new QRadioButton("Комплексные числа", this);
+    ComplexMode->setGeometry(270, 275, 200, 25);
+    RealMode->setChecked(true); // отмеченный по дефолту
+
+
     outputLabel = new QLabel("Вывод:", this);
     outputLabel->setGeometry(50, 300, 600, 25);
 
@@ -81,6 +88,8 @@ Tinterface::~Tinterface() {
     delete imIndicator;
     delete reCoeffsLE;
     delete coeffsLabel;
+    delete ComplexMode;
+    delete RealMode;
 }
 
 

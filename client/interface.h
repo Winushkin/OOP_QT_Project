@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QRadioButton>
 
 #include "../server/array.h"
 #include "../server/number.h"
@@ -37,6 +38,9 @@ class Tinterface : public QWidget
 
     QPushButton *printWithRootsBTN;
     QPushButton *printCanonBtn;
+
+    QRadioButton *RealMode;
+    QRadioButton *ComplexMode;
 
     QLabel *outputLabel;
 
