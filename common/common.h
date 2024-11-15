@@ -23,5 +23,9 @@ enum massages {
     VALUE_AT_POINT_ANSWER,
 };
 
+enum modes{
+    REAL_MODE = 1,
+    COMPLEX_MODE = 2,
+};
 
 #endif
