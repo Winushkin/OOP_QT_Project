@@ -1,5 +1,6 @@
 #ifndef OOPPRACTICE_POLYNOM_H
 #define OOPPRACTICE_POLYNOM_H
+
 #include "iostream"
 #include <sstream>
 using namespace std;
@@ -11,8 +12,7 @@ class Polynom {
     int degree = 0;
 public:
     Polynom();
-    template <class T>
-    Polynom<T>* fill(number leadingCoefficient, number* roots, int rootsCount);
+    Polynom<number>* fill(number leadingCoefficient, number* roots, int rootsCount);
 
     ostringstream polynomWithDegrees();
 
@@ -20,10 +20,8 @@ public:
 
     number valueAtPoint(number point);
 
-    template <class T>
+    template<class T>
     friend ostream& operator << (ostream & os, const Polynom<T> & c);
-
-    Polynom<number> *fill(number leadingCoefficient, number *roots, int rootsCount);
 };
 
 template <class number>
@@ -137,8 +135,8 @@ ostringstream Polynom<number>::polynomWithDegrees() {
 }
 
 
-template <class number>
-std::ostream &operator<<(std::ostream &os, const Polynom<number> &polynom) {
+template <class T>
+std::ostream &operator<<(std::ostream &os, const Polynom<T> &polynom) {
     os << "p(x) = ";
     if(polynom.roots == nullptr) {
         os << *(polynom.coefficients);
