@@ -8,7 +8,6 @@
 #include <QRadioButton>
 
 #include "../server/array.h"
-#include "../server/number.h"
 #include "../server/polynom.h"
 #include "../common/common.h"
 
