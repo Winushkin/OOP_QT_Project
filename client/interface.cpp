@@ -95,7 +95,6 @@ Tinterface::~Tinterface() {
 
 void Tinterface::formRequest()
 {
-
     QString msg;
     QPushButton *btn = (QPushButton*)sender();
     if ( RealMode->isChecked()){
@@ -132,6 +131,7 @@ void Tinterface::formRequest()
             msg << QString().setNum(PRINT_CLASSIC_REQUEST);
         }
     }else{
+        msg << QString().setNum(COMPLEX_MODE);
         if ( btn == addRootBTN ){
             if (reCoeffsLE->text() == "") reCoeffsLE->setText("0");
             if (imCoeffsLE->text() == "") imCoeffsLE->setText("0");
