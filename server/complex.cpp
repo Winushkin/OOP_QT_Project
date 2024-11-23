@@ -1,5 +1,4 @@
 #include "complex.h"
-#include "number.h"
 #include <sstream>
 
 QChar TComplex::SEPARATOR = ';';
