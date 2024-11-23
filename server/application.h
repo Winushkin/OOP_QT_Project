@@ -6,6 +6,7 @@
 
 #include "../common/communicator.h"
 #include "../common/common.h"
+#include "complex.h"
 
 
 
@@ -14,16 +15,18 @@ Q_OBJECT
 
     TCommunicator *comm;
 
-    Polynom* polynom = new Polynom;
+    Polynom<TComplex>* polynom = new Polynom<TComplex>;
+    Polynom<float>* floatPolynom = new Polynom<float>;
 
-    number* roots;
+    TComplex* roots;
 
-    number An = 0;
+    TComplex An = 0;
 
     int rootsAmount = 0;
 
 public:
-    number* pushBack(number *arr, number elem);
+    TComplex* pushBack(TComplex *arr, TComplex elem);
+    float* pushBack(float *arr, float elem);
     ServerApplication(int, char**);
 
 signals:
