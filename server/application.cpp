@@ -1,9 +1,9 @@
 #include "application.h"
-#include "complex.h"
+#include "../common/communicator.h"
 #include "polynom.h"
 
-number* ServerApplication::pushBack(number *arr, number elem){
-    number* resizeArr = new number[rootsAmount + 1];
+TComplex* ServerApplication::pushBack(TComplex *arr, TComplex elem){
+    TComplex* resizeArr = new TComplex[rootsAmount + 1];
     for(int i = 0; i < rootsAmount; i++){
         *(resizeArr + i) = *(arr + i);
     }
@@ -15,6 +15,21 @@ number* ServerApplication::pushBack(number *arr, number elem){
     return arr;
 }
 
+
+float* ServerApplication::pushBack(float *arr, float elem){
+    float* resizeArr = new float[rootsAmount + 1];
+    for(int i = 0; i < rootsAmount; i++){
+        *(resizeArr + i) = *(arr + i);
+    }
+    rootsAmount++;
+    *(resizeArr + rootsAmount - 1) = elem;
+
+    delete []arr;
+    arr = resizeArr;
+    return arr;
+}
+
+
 ServerApplication::ServerApplication(int argc, char *argv[]): QCoreApplication(argc,argv) {
     TCommParams pars = { QHostAddress("127.0.0.1"), 10000,
                          QHostAddress("127.0.0.1"), 10001};
@@ -23,13 +38,15 @@ ServerApplication::ServerApplication(int argc, char *argv[]): QCoreApplication(a
     connect(comm,SIGNAL(recieved(QByteArray)),this,SLOT(recieve(QByteArray)));
 }
 
-
+//обработать моды
 void ServerApplication::recieve(QByteArray msg) {
     QString answer = "";
     std::string out;
-    number root;
+    TComplex ComplexRoot;
     TComplex complex;
-    number point;
+    TComplex ComplexPoint;
+    float floatRoot;
+    float floatPoint;
     int pos = msg.indexOf(separator.toLatin1());
     int t, mode = msg.left(pos).toInt();
     msg = msg.right(msg.length() - pos - 1);
