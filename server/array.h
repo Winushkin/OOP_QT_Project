@@ -106,7 +106,7 @@ template <class number>
 void Array<number>::printArray() {
     std::cout << "Массив: ";
     for(int i = 0; i < length; i++){
-        cout<< *(arr + i) << " ";
+        std::cout<< *(arr + i) << " ";
     }
     std::cout << "\n";
 }
