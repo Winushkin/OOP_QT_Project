@@ -19,8 +19,10 @@ Q_OBJECT
     Polynom<float>* floatPolynom = new Polynom<float>;
 
     TComplex* roots;
+    float* floatRoots;
 
     TComplex An = 0;
+    float floatAn = 0;
 
     int rootsAmount = 0;
 
