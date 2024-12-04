@@ -6,6 +6,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QRadioButton>
+#include <QButtonGroup>
 
 #include "../server/array.h"
 #include "../server/polynom.h"
@@ -15,6 +16,8 @@
 class Tinterface : public QWidget
 {
     Q_OBJECT
+
+    QButtonGroup *numberSets, *functions;
 
     QLabel *coeffsLabel, *imIndicator;
     QLineEdit *reCoeffsLE, *imCoeffsLE;
@@ -42,6 +45,19 @@ class Tinterface : public QWidget
     QRadioButton *ComplexMode;
 
     QLabel *outputLabel;
+
+
+    //Sin, Si
+    QLabel *trigonometry;
+
+    QRadioButton *SinMode;
+    QRadioButton *SiMode;
+
+    QLabel *decompositionDegreeLabel;
+    QPushButton *printFuncDecomposition;
+    QLineEdit *funcDegree;
+    QLabel *decompositionLabel;
+
 
     friend QString& operator<< (QString&,const QString&);
 

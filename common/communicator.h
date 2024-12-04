@@ -24,7 +24,6 @@ Q_OBJECT
 
 public:
     TCommunicator(TCommParams&,QObject *parent = nullptr);
-    bool isReady();
 
 signals:
     void recieved(QByteArray);
