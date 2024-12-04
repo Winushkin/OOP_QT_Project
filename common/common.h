@@ -21,6 +21,8 @@ enum massages {
     CHANGE_ROOT_ANSWER,
     VALUE_AT_POINT_REQUEST,
     VALUE_AT_POINT_ANSWER,
+    DECOMPOSE_SIN,
+    DECOMPOSE_SI,
 };
 
 enum modes{
