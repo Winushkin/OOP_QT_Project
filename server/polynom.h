@@ -8,10 +8,12 @@ using namespace std;
 template <class number>
 class Polynom {
     number* roots = nullptr;
-    number* coefficients = nullptr;
     int degree = 0;
+protected:
+    number* coefficients = nullptr;
 public:
     Polynom();
+    Polynom(int degree);
     Polynom<number>* fill(number leadingCoefficient, number* roots, int rootsCount);
 
     ostringstream polynomWithDegrees();
@@ -23,6 +25,17 @@ public:
     template<class T>
     friend ostream& operator << (ostream & os, const Polynom<T> & c);
 };
+
+template<class number>
+Polynom<number>::Polynom(int degree) {
+    roots = new number[degree];
+    coefficients = new number[degree];
+    this->degree = degree;
+    for(int i = 0; i < degree; i++){
+        coefficients[i] = 1;
+        roots[i] = 0;
+    }
+}
 
 template <class number>
 Polynom<number>::Polynom(): coefficients(nullptr), roots(nullptr), degree(0) {}
