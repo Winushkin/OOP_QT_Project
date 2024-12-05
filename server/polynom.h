@@ -8,10 +8,10 @@ using namespace std;
 template <class number>
 class Polynom {
     number* roots = nullptr;
-    int degree = 0;
 protected:
     number* coefficients = nullptr;
 public:
+    int degree = 0;
     Polynom();
     Polynom(int degree);
     Polynom<number>* fill(number leadingCoefficient, number* roots, int rootsCount);

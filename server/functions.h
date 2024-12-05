@@ -10,7 +10,7 @@ template <class number>
 class TFunction : protected Polynom<number> {
 public:
     TFunction(unsigned int n, number* coefficients);
-    number operator()(number point);
+    number value(number point);
 };
 
 template<class number>
@@ -20,10 +20,10 @@ TFunction<number>::TFunction(unsigned int n, number *coefficients) {
 }
 
 template<class number>
-number TFunction<number>::operator()(number point) {
+number TFunction<number>::value(number point) {
     number result = 0;
-    Polynom<number>* polynom = new Polynom(this->degree);
-    for(int i = 0; i < polynom->degree; i++) {
+    Polynom<number> polynom (this->degree);
+    for(int i = 0; i < polynom.degree; i++) {
         result += pow(point, this->degree - i) * this->coefficients[i];
     }
     return result;
@@ -54,7 +54,7 @@ class TFsin: public TFunction<number> {
 
 template<class number>
 class TFSi: public TFunction<number> {
-    number derivatives;
+    number *derivatives;
     number* derivativesCalc(unsigned int n) {
         derivatives = new number[n];
         for (int k = 0; k < n; ++k) {

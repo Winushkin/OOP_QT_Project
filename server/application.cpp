@@ -1,6 +1,7 @@
 #include "application.h"
 #include "../common/communicator.h"
 #include "polynom.h"
+#include "functions.h"
 
 TComplex* ServerApplication::pushBack(TComplex *arr, TComplex elem){
     auto* resizeArr = new TComplex[rootsAmount + 1];
@@ -40,6 +41,8 @@ ServerApplication::ServerApplication(int argc, char *argv[]): QCoreApplication(a
 
 //обработать моды
 void ServerApplication::recieve(QByteArray msg) {
+    TFsin<double> *Sin;
+    TFSi<double> *Si;
     QString answer = "";
     std::string out;
     TComplex ComplexRoot;
@@ -47,12 +50,33 @@ void ServerApplication::recieve(QByteArray msg) {
     float floatRoot;
     float floatPoint;
     int index;
+    double valueOfFunction;
     int pos = msg.indexOf(separator.toLatin1());
     int mode = msg.left(pos).toInt();
     msg.remove(0, 2);
     int t = msg.left(pos).toInt();
     msg.remove(0, 2);
     switch (t) {
+        case DECOMPOSE_SIN:
+            pos = msg.indexOf(separator.toLatin1());
+            index = msg.left(pos).toInt();
+            Sin = new TFsin<double>(index);
+            valueOfFunction= Sin->value(index);
+            answer << QString().setNum(DECOMPOSE_SIN);
+            answer << QString().setNum(valueOfFunction);
+            delete Sin;
+            break;
+
+        case DECOMPOSE_SI:
+            pos = msg.indexOf(separator.toLatin1());
+            index = msg.left(pos).toInt();
+            Si = new TFSi<double>(index);
+            valueOfFunction= Si->value(index);
+            answer << QString().setNum(DECOMPOSE_SI);
+            answer << QString().setNum(valueOfFunction);
+            delete Si;
+            break;
+
         case PRINT_CLASSIC_REQUEST:
             answer << QString().setNum(PRINT_POLYNOM_ANSWER);
             if (mode == COMPLEX_MODE){
