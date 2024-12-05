@@ -142,8 +142,10 @@ void Tinterface::formRequest()
     QPushButton *btn = (QPushButton*)sender();
     if ( btn == printFuncDecomposition ){
         if ( SinMode->isChecked() ){
+            msg << QString().setNum(REAL_MODE);
             msg << QString().setNum(DECOMPOSE_SIN);
         } else {
+            msg << QString().setNum(REAL_MODE);
             msg << QString().setNum(DECOMPOSE_SI);
         }
         msg << funcDegree->text();
@@ -237,6 +239,14 @@ void Tinterface::answer(QString msg){
 
         case PRINT_POLYNOM_ANSWER:
             outputLabel->setText(text);
+            break;
+
+        case DECOMPOSE_SIN:
+            decompositionLabel->setText(text);
+            break;
+
+        case DECOMPOSE_SI:
+            decompositionLabel->setText(text);
             break;
 
         default:

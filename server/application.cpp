@@ -63,7 +63,7 @@ void ServerApplication::recieve(QByteArray msg) {
             Sin = new TFsin<double>(index);
             valueOfFunction= Sin->value(index);
             answer << QString().setNum(DECOMPOSE_SIN);
-            answer << QString().setNum(valueOfFunction);
+            answer += QString::number(valueOfFunction);
             delete Sin;
             break;
 
@@ -73,7 +73,7 @@ void ServerApplication::recieve(QByteArray msg) {
             Si = new TFSi<double>(index);
             valueOfFunction= Si->value(index);
             answer << QString().setNum(DECOMPOSE_SI);
-            answer << QString().setNum(valueOfFunction);
+            answer += QString::number(valueOfFunction);
             delete Si;
             break;
 
