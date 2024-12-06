@@ -41,8 +41,12 @@ ServerApplication::ServerApplication(int argc, char *argv[]): QCoreApplication(a
 
 //обработать моды
 void ServerApplication::recieve(QByteArray msg) {
-    TFsin<double> *Sin;
-    TFSi<double> *Si;
+    TFsin<double> *SinDouble;
+    TFSi<double> *SiDouble;
+    TFsin<TComplex> *SinComplex;
+    TFSi<TComplex> *SiComplex;
+    double pointD;
+    TComplex pointC;
     QString answer = "";
     std::string out;
     TComplex ComplexRoot;
@@ -50,7 +54,8 @@ void ServerApplication::recieve(QByteArray msg) {
     float floatRoot;
     float floatPoint;
     int index;
-    double valueOfFunction;
+    double valueOfFunctionD;
+    TComplex valueOfFunctionC;
     int pos = msg.indexOf(separator.toLatin1());
     int mode = msg.left(pos).toInt();
     msg.remove(0, 2);
@@ -63,23 +68,53 @@ void ServerApplication::recieve(QByteArray msg) {
     }
     switch (t) {
         case DECOMPOSE_SIN:
-            pos = msg.indexOf(separator.toLatin1());
-            index = msg.left(pos).toInt();
-            Sin = new TFsin<double>(index);
-            valueOfFunction= Sin->value(index);
-            answer << QString().setNum(DECOMPOSE_SIN);
-            answer += QString::number(valueOfFunction);
-            delete Sin;
+            if (mode == REAL_MODE) {
+                pos = msg.indexOf(separator.toLatin1());
+                index = msg.left(pos).toInt();
+                SinDouble = new TFsin<double>(index);
+                msg.remove(0, pos + 1);
+                pos = msg.indexOf(separator.toLatin1());
+                pointD = msg.left(pos).toDouble();
+                valueOfFunctionD = SinDouble->value(pointD);
+                answer << QString().setNum(DECOMPOSE_SIN);
+                answer += QString::number(valueOfFunctionD);
+                delete SinDouble;
+            } else {
+                pos = msg.indexOf(separator.toLatin1());
+                index = msg.left(pos).toInt();
+                SinComplex = new TFsin<TComplex>(index);
+                msg.remove(0, pos + 1);
+                msg >> pointC;
+                valueOfFunctionC = SinComplex->value(pointC);
+                answer << QString().setNum(DECOMPOSE_SIN);
+                answer += QString::fromStdString(valueOfFunctionC.to_str());
+                delete SinComplex;
+            }
             break;
 
         case DECOMPOSE_SI:
-            pos = msg.indexOf(separator.toLatin1());
-            index = msg.left(pos).toInt();
-            Si = new TFSi<double>(index);
-            valueOfFunction= Si->value(index);
-            answer << QString().setNum(DECOMPOSE_SI);
-            answer += QString::number(valueOfFunction);
-            delete Si;
+            if (mode == REAL_MODE) {
+                pos = msg.indexOf(separator.toLatin1());
+                index = msg.left(pos).toInt();
+                SiDouble = new TFSi<double>(index);
+                msg.remove(0, pos + 1);
+                pos = msg.indexOf(separator.toLatin1());
+                pointD = msg.left(pos).toDouble();
+                valueOfFunctionD = SiDouble->value(pointD);
+                answer << QString().setNum(DECOMPOSE_SI);
+                answer += QString::number(valueOfFunctionD);
+                delete SiDouble;
+            } else {
+                pos = msg.indexOf(separator.toLatin1());
+                index = msg.left(pos).toInt();
+                SiComplex = new TFSi<TComplex>(index);
+                msg.remove(0, pos + 1);
+                msg >> pointC;
+                valueOfFunctionC = SiComplex->value(pointC);
+                answer << QString().setNum(DECOMPOSE_SI);
+                answer += QString::fromStdString(valueOfFunctionC.to_str());
+                delete SiComplex;
+            }
             break;
 
         case PRINT_CLASSIC_REQUEST:
