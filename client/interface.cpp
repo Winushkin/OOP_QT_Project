@@ -148,105 +148,96 @@ Tinterface::~Tinterface() {
 void Tinterface::formRequest() {
     QString msg;
     QPushButton *btn = (QPushButton *) sender();
-
     if (RealMode->isChecked()) {
+        msg << QString().setNum(REAL_MODE);
+        if (btn == addRootBTN) {
+            imCoeffsLE->setText("0");
+            if (reCoeffsLE->text() == "") reCoeffsLE->setText("0");
+            msg << QString().setNum(ADD_ROOT_REQUEST);
+            msg << reCoeffsLE->text();
+        }
+        if (btn == changeRootBTN) {
+            imCoeffsLE->setText("0");
+            if (reCoeffsLE->text() == "") reCoeffsLE->setText("0");
+            msg << QString().setNum(CHANGE_ROOT_REQUEST);
+            msg << changeRootLineEdit->text();
+            msg << reCoeffsLE->text();
+        }
+        if (btn == addLeadCoeffBTN) {
+            imLeadCoeff->setText("0");
+            if (reLeadCoeff->text() == "") reLeadCoeff->setText("0");
+            msg << QString().setNum(ADD_COEFFICIENT_REQUEST);
+            msg << reLeadCoeff->text();
+        }
+        if (btn == calculateValueAtPointBTN) {
+            valueAtPointImLe->setText("0");
+            if (valueAtPointReLe->text() == "") valueAtPointReLe->setText("0");
+            msg << QString().setNum(VALUE_AT_POINT_REQUEST);
+            msg << valueAtPointReLe->text();
+        }
+        if (btn == printCanonBtn) {
+            msg << QString().setNum(PRINT_CANONIC_REQUEST);
+        }
+        if (btn == printWithRootsBTN) {
+            msg << QString().setNum(PRINT_CLASSIC_REQUEST);
+        }
 
+        if (btn == printFuncDecomposition) {
+            if (SinMode->isChecked()) {
+                msg << QString().setNum(DECOMPOSE_SIN);
+            } else {
+                msg << QString().setNum(DECOMPOSE_SI);
+            }
+            msg << funcDegree->text();
+            ImValueToDecompose->setText("0");
+            if (ReValueToDecompose->text() == "") ReValueToDecompose->setText("0");
+            msg << ReValueToDecompose->text();
 
-        if (RealMode->isChecked()) {
-            msg << QString().setNum(REAL_MODE);
-            if (btn == addRootBTN) {
-                imCoeffsLE->setText("0");
-                if (reCoeffsLE->text() == "") reCoeffsLE->setText("0");
-                msg << QString().setNum(ADD_ROOT_REQUEST);
-                msg << reCoeffsLE->text();
+        }
+    } else {
+        msg << QString().setNum(COMPLEX_MODE);
+        if (btn == addRootBTN) {
+            if (reCoeffsLE->text() == "") reCoeffsLE->setText("0");
+            if (imCoeffsLE->text() == "") imCoeffsLE->setText("0");
+            msg << QString().setNum(ADD_ROOT_REQUEST);
+            msg << reCoeffsLE->text() << imCoeffsLE->text();
+        }
+        if (btn == changeRootBTN) {
+            if (reCoeffsLE->text() == "") reCoeffsLE->setText("0");
+            if (imCoeffsLE->text() == "") imCoeffsLE->setText("0");
+            msg << QString().setNum(CHANGE_ROOT_REQUEST);
+            msg << changeRootLineEdit->text();
+            msg << reCoeffsLE->text() << imCoeffsLE->text();
+        }
+        if (btn == addLeadCoeffBTN) {
+            if (reLeadCoeff->text() == "") reLeadCoeff->setText("0");
+            if (imLeadCoeff->text() == "") imLeadCoeff->setText("0");
+            msg << QString().setNum(ADD_COEFFICIENT_REQUEST);
+            msg << reLeadCoeff->text() << imLeadCoeff->text();
+        }
+        if (btn == calculateValueAtPointBTN) {
+            if (valueAtPointReLe->text() == "") valueAtPointReLe->setText("0");
+            if (valueAtPointImLe->text() == "") valueAtPointImLe->setText("0");
+            msg << QString().setNum(VALUE_AT_POINT_REQUEST);
+            msg << valueAtPointReLe->text() << valueAtPointImLe->text();
+        }
+        if (btn == printCanonBtn) {
+            msg << QString().setNum(PRINT_CANONIC_REQUEST);
+        }
+        if (btn == printWithRootsBTN) {
+            msg << QString().setNum(PRINT_CLASSIC_REQUEST);
+        }
+        if (btn == printFuncDecomposition) {
+            if (SinMode->isChecked()) {
+                msg << QString().setNum(DECOMPOSE_SIN);
+            } else {
+                msg << QString().setNum(DECOMPOSE_SI);
             }
-            if (btn == changeRootBTN) {
-                imCoeffsLE->setText("0");
-                if (reCoeffsLE->text() == "") reCoeffsLE->setText("0");
-                msg << QString().setNum(CHANGE_ROOT_REQUEST);
-                msg << changeRootLineEdit->text();
-                msg << reCoeffsLE->text();
-            }
-            if (btn == addLeadCoeffBTN) {
-                imLeadCoeff->setText("0");
-                if (reLeadCoeff->text() == "") reLeadCoeff->setText("0");
-                msg << QString().setNum(ADD_COEFFICIENT_REQUEST);
-                msg << reLeadCoeff->text();
-            }
-            if (btn == calculateValueAtPointBTN) {
-                valueAtPointImLe->setText("0");
-                if (valueAtPointReLe->text() == "") valueAtPointReLe->setText("0");
-                msg << QString().setNum(VALUE_AT_POINT_REQUEST);
-                msg << valueAtPointReLe->text();
-            }
-            if (btn == printCanonBtn) {
-                msg << QString().setNum(PRINT_CANONIC_REQUEST);
-            }
-            if (btn == printWithRootsBTN) {
-                msg << QString().setNum(PRINT_CLASSIC_REQUEST);
-            }
+            msg << funcDegree->text();
+            if (ReValueToDecompose->text() == "") ReValueToDecompose->setText("0");
+            if (ImValueToDecompose->text() == "") ImValueToDecompose->setText("0");
+            msg << ReValueToDecompose->text() << ImValueToDecompose->text();
 
-            if (btn == printFuncDecomposition) {
-                if (SinMode->isChecked()) {
-                    msg << QString().setNum(REAL_MODE);
-                    msg << QString().setNum(DECOMPOSE_SIN);
-                } else {
-                    msg << QString().setNum(REAL_MODE);
-                    msg << QString().setNum(DECOMPOSE_SI);
-                }
-                msg << funcDegree->text();
-                ImValueToDecompose->setText("0");
-                if (ReValueToDecompose->text() == "") ReValueToDecompose->setText("0");
-                msg << ReValueToDecompose->text();
-
-            }
-        } else {
-            msg << QString().setNum(COMPLEX_MODE);
-            if (btn == addRootBTN) {
-                if (reCoeffsLE->text() == "") reCoeffsLE->setText("0");
-                if (imCoeffsLE->text() == "") imCoeffsLE->setText("0");
-                msg << QString().setNum(ADD_ROOT_REQUEST);
-                msg << reCoeffsLE->text() << imCoeffsLE->text();
-            }
-            if (btn == changeRootBTN) {
-                if (reCoeffsLE->text() == "") reCoeffsLE->setText("0");
-                if (imCoeffsLE->text() == "") imCoeffsLE->setText("0");
-                msg << QString().setNum(CHANGE_ROOT_REQUEST);
-                msg << changeRootLineEdit->text();
-                msg << reCoeffsLE->text() << imCoeffsLE->text();
-            }
-            if (btn == addLeadCoeffBTN) {
-                if (reLeadCoeff->text() == "") reLeadCoeff->setText("0");
-                if (imLeadCoeff->text() == "") imLeadCoeff->setText("0");
-                msg << QString().setNum(ADD_COEFFICIENT_REQUEST);
-                msg << reLeadCoeff->text() << imLeadCoeff->text();
-            }
-            if (btn == calculateValueAtPointBTN) {
-                if (valueAtPointReLe->text() == "") valueAtPointReLe->setText("0");
-                if (valueAtPointImLe->text() == "") valueAtPointImLe->setText("0");
-                msg << QString().setNum(VALUE_AT_POINT_REQUEST);
-                msg << valueAtPointReLe->text() << valueAtPointImLe->text();
-            }
-            if (btn == printCanonBtn) {
-                msg << QString().setNum(PRINT_CANONIC_REQUEST);
-            }
-            if (btn == printWithRootsBTN) {
-                msg << QString().setNum(PRINT_CLASSIC_REQUEST);
-            }
-            if (btn == printFuncDecomposition) {
-                if (SinMode->isChecked()) {
-                    msg << QString().setNum(COMPLEX_MODE);
-                    msg << QString().setNum(DECOMPOSE_SIN);
-                } else {
-                    msg << QString().setNum(COMPLEX_MODE);
-                    msg << QString().setNum(DECOMPOSE_SI);
-                }
-                msg << funcDegree->text();
-                if (ReValueToDecompose->text() == "") ReValueToDecompose->setText("0");
-                if (ImValueToDecompose->text() == "") ImValueToDecompose->setText("0");
-                msg << ReValueToDecompose->text() << ImValueToDecompose->text();
-
-            }
         }
     }
     emit request(msg);
@@ -271,13 +262,10 @@ void Tinterface::answer(QString msg){
             break;
 
         case DECOMPOSE_SIN:
-            decompositionLabel->setText(text);
-            break;
-
         case DECOMPOSE_SI:
+            text = "Вывод: " + text;
             decompositionLabel->setText(text);
             break;
-
         default:
             break;
     }
