@@ -77,25 +77,20 @@ Tinterface::Tinterface(QWidget *parent){
     SiMode = new QRadioButton("Функция Si", this);
     SiMode->setGeometry(270, 375, 200, 25);
     SinMode->setChecked(true); // отмеченный по дефолту
-
     functions->addButton(SinMode);
     functions->addButton(SiMode);
 
     decompositionDegreeLabel = new QLabel("Степень разложения: ",this);
     decompositionDegreeLabel->setGeometry(50, 425, 150, 25);
-
     funcDegree = new QLineEdit(this);
     funcDegree->setGeometry(200, 425, 25, 25);
 
     ValueToDecomposeLabel = new QLabel("X: ", this);
     ValueToDecomposeLabel->setGeometry(280, 425, 30, 25);
-
     ReValueToDecompose = new QLineEdit(this);
     ReValueToDecompose->setGeometry(300, 425, 25, 25);
-
     imIndicator = new QLabel("+i", this);
     imIndicator->setGeometry(325, 425, 25, 25);
-
     ImValueToDecompose = new QLineEdit(this);
     ImValueToDecompose->setGeometry(350, 425, 25, 25);
 
@@ -104,7 +99,6 @@ Tinterface::Tinterface(QWidget *parent){
 
     decompositionLabel = new QLabel("Вывод: ", this);
     decompositionLabel->setGeometry(50, 500, 300, 30);
-
 
 
     connect(addRootBTN,SIGNAL(pressed()), this,SLOT(formRequest()));
@@ -148,28 +142,16 @@ Tinterface::~Tinterface() {
     delete ReValueToDecompose;
     delete ImValueToDecompose;
     delete ValueToDecomposeLabel;
-    delete decompositionDegreeLabel;
 }
 
 
-void Tinterface::formRequest()
-{
+void Tinterface::formRequest() {
     QString msg;
-    QPushButton *btn = (QPushButton*)sender();
-    if ( btn == printFuncDecomposition ){
-        if ( SinMode->isChecked() ){
-            if ( RealMode->isChecked() ){
+    QPushButton *btn = (QPushButton *) sender();
 
-            }
-            msg << QString().setNum(REAL_MODE);
-            msg << QString().setNum(DECOMPOSE_SIN);
-        } else {
-            msg << QString().setNum(REAL_MODE);
-            msg << QString().setNum(DECOMPOSE_SI);
-        }
-        msg << funcDegree->text();
+    if (RealMode->isChecked()) {
 
-    } else {
+
         if (RealMode->isChecked()) {
             msg << QString().setNum(REAL_MODE);
             if (btn == addRootBTN) {
@@ -202,6 +184,21 @@ void Tinterface::formRequest()
             }
             if (btn == printWithRootsBTN) {
                 msg << QString().setNum(PRINT_CLASSIC_REQUEST);
+            }
+
+            if (btn == printFuncDecomposition) {
+                if (SinMode->isChecked()) {
+                    msg << QString().setNum(REAL_MODE);
+                    msg << QString().setNum(DECOMPOSE_SIN);
+                } else {
+                    msg << QString().setNum(REAL_MODE);
+                    msg << QString().setNum(DECOMPOSE_SI);
+                }
+                msg << funcDegree->text();
+                ImValueToDecompose->setText("0");
+                if (ReValueToDecompose->text() == "") ReValueToDecompose->setText("0");
+                msg << ReValueToDecompose->text();
+
             }
         } else {
             msg << QString().setNum(COMPLEX_MODE);
@@ -236,9 +233,22 @@ void Tinterface::formRequest()
             if (btn == printWithRootsBTN) {
                 msg << QString().setNum(PRINT_CLASSIC_REQUEST);
             }
+            if (btn == printFuncDecomposition) {
+                if (SinMode->isChecked()) {
+                    msg << QString().setNum(COMPLEX_MODE);
+                    msg << QString().setNum(DECOMPOSE_SIN);
+                } else {
+                    msg << QString().setNum(COMPLEX_MODE);
+                    msg << QString().setNum(DECOMPOSE_SI);
+                }
+                msg << funcDegree->text();
+                if (ReValueToDecompose->text() == "") ReValueToDecompose->setText("0");
+                if (ImValueToDecompose->text() == "") ImValueToDecompose->setText("0");
+                msg << ReValueToDecompose->text() << ImValueToDecompose->text();
+
+            }
         }
     }
-
     emit request(msg);
 }
 
