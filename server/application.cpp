@@ -54,8 +54,13 @@ void ServerApplication::recieve(QByteArray msg) {
     int pos = msg.indexOf(separator.toLatin1());
     int mode = msg.left(pos).toInt();
     msg.remove(0, 2);
+    pos = msg.indexOf(separator.toLatin1());
     int t = msg.left(pos).toInt();
-    msg.remove(0, 2);
+    if (t == DECOMPOSE_SI || t == DECOMPOSE_SIN) {
+        msg.remove(0, 3);
+    }else {
+        msg.remove(0, 2);
+    }
     switch (t) {
         case DECOMPOSE_SIN:
             pos = msg.indexOf(separator.toLatin1());

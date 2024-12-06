@@ -58,6 +58,11 @@ class Tinterface : public QWidget
     QLineEdit *funcDegree;
     QLabel *decompositionLabel;
 
+    QLabel *ValueToDecomposeLabel;
+    QLineEdit *ReValueToDecompose;
+    QLineEdit *ImValueToDecompose;
+
+
 
     friend QString& operator<< (QString&,const QString&);
 

@@ -74,7 +74,7 @@ Tinterface::Tinterface(QWidget *parent){
 
     SinMode = new QRadioButton("Функция Sin", this);
     SinMode->setGeometry(50, 375, 200, 25);
-    SiMode = new QRadioButton("Функция Sin", this);
+    SiMode = new QRadioButton("Функция Si", this);
     SiMode->setGeometry(270, 375, 200, 25);
     SinMode->setChecked(true); // отмеченный по дефолту
 
@@ -86,6 +86,18 @@ Tinterface::Tinterface(QWidget *parent){
 
     funcDegree = new QLineEdit(this);
     funcDegree->setGeometry(200, 425, 25, 25);
+
+    ValueToDecomposeLabel = new QLabel("X: ", this);
+    ValueToDecomposeLabel->setGeometry(280, 425, 30, 25);
+
+    ReValueToDecompose = new QLineEdit(this);
+    ReValueToDecompose->setGeometry(300, 425, 25, 25);
+
+    imIndicator = new QLabel("+i", this);
+    imIndicator->setGeometry(325, 425, 25, 25);
+
+    ImValueToDecompose = new QLineEdit(this);
+    ImValueToDecompose->setGeometry(350, 425, 25, 25);
 
     printFuncDecomposition = new QPushButton("Показать разложение", this);
     printFuncDecomposition->setGeometry(50, 450, 220, 30);
@@ -133,6 +145,10 @@ Tinterface::~Tinterface() {
     delete printFuncDecomposition;
     delete funcDegree;
     delete decompositionDegreeLabel;
+    delete ReValueToDecompose;
+    delete ImValueToDecompose;
+    delete ValueToDecomposeLabel;
+    delete decompositionDegreeLabel;
 }
 
 
@@ -142,6 +158,9 @@ void Tinterface::formRequest()
     QPushButton *btn = (QPushButton*)sender();
     if ( btn == printFuncDecomposition ){
         if ( SinMode->isChecked() ){
+            if ( RealMode->isChecked() ){
+
+            }
             msg << QString().setNum(REAL_MODE);
             msg << QString().setNum(DECOMPOSE_SIN);
         } else {

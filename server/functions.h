@@ -38,11 +38,11 @@ class TFsin: public TFunction<number> {
             if (i % 4 == 0) {
                 derivatives[i] = 0;  // sin(0)
             } else if (i % 4 == 1) {
-                derivatives[i] = 1;  // cos(0)
+                derivatives[i] = 1 / pow(i, 2);  // cos(0)
             } else if (i % 4 == 2) {
                 derivatives[i] = 0;  // -sin(0)
             } else if (i % 4 == 3) {
-                derivatives[i] = -1; // -cos(0)
+                derivatives[i] = -1 / pow(i, 2); // -cos(0)
             }
         }
         return derivatives;
