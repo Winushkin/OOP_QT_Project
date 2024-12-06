@@ -5,6 +5,13 @@
 #include "cmath"
 #include "iostream"
 
+int factorial(unsigned int n) {
+    int result = 1;
+    for (unsigned int i = 2; i <= n; ++i) {
+        result *= i;
+    }
+    return result;
+}
 
 template <class number>
 class TFunction : protected Polynom<number> {
@@ -24,7 +31,7 @@ number TFunction<number>::value(number point) {
     number result = 0;
     Polynom<number> polynom (this->degree);
     for(int i = 0; i < polynom.degree; i++) {
-        result += pow(point, this->degree - i) * this->coefficients[i];
+        result += pow(point, i) * this->coefficients[i];
     }
     return result;
 }
@@ -38,11 +45,11 @@ class TFsin: public TFunction<number> {
             if (i % 4 == 0) {
                 derivatives[i] = 0;  // sin(0)
             } else if (i % 4 == 1) {
-                derivatives[i] = 1.0 / pow(i, 2);  // cos(0)
+                derivatives[i] = 1.0 / factorial(i);  // cos(0)
             } else if (i % 4 == 2) {
                 derivatives[i] = 0;  // -sin(0)
             } else if (i % 4 == 3) {
-                derivatives[i] = -1.0 / pow(i, 2); // -cos(0)
+                derivatives[i] = -1.0 / factorial(i); // -cos(0)
             }
         }
         return derivatives;
