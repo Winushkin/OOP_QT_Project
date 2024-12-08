@@ -255,3 +255,9 @@ QByteArray &operator>>(QByteArray &arr, TComplex &c) {
     }
     return arr;
 }
+
+TComplex TComplex::operator/(double second) const {
+    double a = (re * second + im * 0)/(second * second + 0);
+    double b = (second * im - re * 0)/(second * second + 0);
+    return TComplex(a, b);
+}

@@ -30,7 +30,8 @@ template<class number>
 number TFunction<number>::value(number point) {
     number result = 0;
     Polynom<number> polynom (this->degree);
-    for(int i = 0; i < polynom.degree; i++) {
+    point = point * 3.14 / 180.0;
+    for(int i = 0; i <= polynom.degree; i++) {
         result += pow(point, i) * this->coefficients[i];
     }
     return result;
@@ -41,7 +42,7 @@ class TFsin: public TFunction<number> {
     number *derivatives;
     number* derivativesCalc(unsigned int n) {
         derivatives = new number[n];
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i <= n; ++i) {
             if (i % 4 == 0) {
                 derivatives[i] = 0;  // sin(0)
             } else if (i % 4 == 1) {
@@ -51,7 +52,9 @@ class TFsin: public TFunction<number> {
             } else if (i % 4 == 3) {
                 derivatives[i] = -1.0 / factorial(i); // -cos(0)
             }
+            cout << derivatives[i] << " ";
         }
+        cout << "\n";
         return derivatives;
     }
     public:
@@ -64,7 +67,7 @@ class TFSi: public TFunction<number> {
     number *derivatives;
     number* derivativesCalc(unsigned int n) {
         derivatives = new number[n];
-        for (int k = 0; k < n; ++k) {
+        for (int k = 0; k <= n; ++k) {
             if (k % 2 == 0) {
                 derivatives[k] = 0; // Чётные производные равны 0
             } else {
