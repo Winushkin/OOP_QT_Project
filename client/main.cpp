@@ -1,8 +1,10 @@
-#include <QTranslator>
-#include "application.h"
+#include <QApplication>
+#include "interface.h"
 
 
 int main(int argc, char *argv[]) {
-    ClientApplication a(argc, argv);
+    QApplication a(argc, argv);
+    Tinterface interface;
+    interface.show();
     return a.exec();
 }

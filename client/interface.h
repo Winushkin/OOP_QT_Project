@@ -6,80 +6,33 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QRadioButton>
-#include <QButtonGroup>
-
-#include "../server/array.h"
-#include "../server/polynom.h"
-#include "../common/common.h"
+#include "sinplotter.h"
+#include "../server/functions.h"
 
 
 class Tinterface : public QWidget
 {
     Q_OBJECT
-
-    QButtonGroup *numberSets, *functions;
-
-    QLabel *coeffsLabel, *imIndicator;
-    QLineEdit *reCoeffsLE, *imCoeffsLE;
-
-    QPushButton *addRootBTN;
-
-    QPushButton *changeRootBTN;
-    QLineEdit *changeRootLineEdit;
-
-    QLabel *leadingCoeff;
-    QLineEdit *reLeadCoeff, *imLeadCoeff;
-
-    QPushButton *addLeadCoeffBTN;
-
-    QLabel *calculateValueAtPoint;
-    QLineEdit *valueAtPointReLe;
-    QLineEdit *valueAtPointImLe;
-    QPushButton *calculateValueAtPointBTN;
-    QLabel *valueAtPointLabel;
-
-    QPushButton *printWithRootsBTN;
-    QPushButton *printCanonBtn;
-
-    QRadioButton *RealMode;
-    QRadioButton *ComplexMode;
-
-    QLabel *outputLabel;
-
-
     //Sin, Si
     QLabel *trigonometry;
 
     QRadioButton *SinMode;
     QRadioButton *SiMode;
 
-    QLabel *decompositionDegreeLabel;
-    QPushButton *printFuncDecomposition;
-    QLineEdit *funcDegree;
-    QLabel *decompositionLabel;
+    QLabel *initialValueOfRangeLabel;
+    QLabel *finalValueOfRangeLabel;
+    QLineEdit *ReValueInitial;
+    QLineEdit *ReValueFinal;
 
-    QLabel *ValueToDecomposeLabel;
-    QLineEdit *ReValueToDecompose;
-    QLineEdit *ImValueToDecompose;
-
-
-
-    friend QString& operator<< (QString&,const QString&);
-
-
+    SinPlotter* plotter;  // Виджет для отображения графика
+    QPushButton* updatePlotButton; // Кнопка обновления
+    double* sineValues = nullptr;   // Указатель на массив значений синуса
 public:
     Tinterface(QWidget *parent = 0);
     ~Tinterface();
 
 public slots:
-    void answer(QString);
-
-private slots:
-    void formRequest();
-
-signals:
-    void request(QString);
-
+    void updatePlot();
 };
 
 #endif // INTERFACE_H

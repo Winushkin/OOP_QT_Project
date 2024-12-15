@@ -5,7 +5,7 @@
 #include "cmath"
 #include "iostream"
 
-int factorial(unsigned int n) {
+inline int factorial(unsigned int n) {
     int result = 1;
     for (unsigned int i = 2; i <= n; ++i) {
         result *= i;
