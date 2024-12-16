@@ -58,7 +58,7 @@ class TFsin: public TFunction<number> {
         return derivatives;
     }
     public:
-    TFsin(unsigned int n): TFunction<number>(n, derivativesCalc(n)) {}
+        TFsin(unsigned int n): TFunction<number>(n, derivativesCalc(n)) {}
     ~TFsin() { delete[] derivatives; }
 };
 
