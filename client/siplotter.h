@@ -1,6 +1,7 @@
 #ifndef OOP_QT_PROJECT_SIPLOTTER_H
 #define OOP_QT_PROJECT_SIPLOTTER_H
 #include <QWidget>
+#include <QPainter>
 
 class SiPlotter: public QWidget {
 Q_OBJECT
