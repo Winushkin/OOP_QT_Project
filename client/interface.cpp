@@ -29,8 +29,11 @@ Tinterface::Tinterface(QWidget *parent){
     updatePlotButton = new QPushButton("Обновить график", this);
     updatePlotButton->setGeometry(50, 100, 200, 30);
 
-    plotter = new SinPlotter(this);
-    plotter->setGeometry(25, 140, 400, 200);
+    sinPlotter = new SinPlotter(this);
+    sinPlotter->setGeometry(25, 140, 400, 200);
+
+    siPlotter = new SiPlotter(this);
+    siPlotter->setGeometry(25, 140, 400, 200);
 
     connect(updatePlotButton, SIGNAL(clicked()), this, SLOT(updatePlot()));
 }
@@ -46,7 +49,8 @@ Tinterface::~Tinterface() {
     delete semicolonIdentificator;
     delete[] values;
     delete updatePlotButton;
-    delete plotter;
+    delete siPlotter;
+    delete sinPlotter;
 }
 
 
@@ -54,14 +58,12 @@ void Tinterface::updatePlot() {
     double x1 = ReValueInitial->text().toDouble();
     double x2 = ReValueFinal->text().toDouble();
 
+    delete[] values;
+    int degree = 10;
+
     if ( SinMode->isChecked() ) {
-        // Проверка на пустое или неинициализированное значение
-        if (values != nullptr) {
-            delete[] values;  // Освобождаем память только если она была выделена
-        }
 
         // Создаем новый объект для вычисления значений синуса
-        int degree = 10;
         TFsin<double>* SinDouble = new TFsin<double>(degree);
 
         // Количество точек для графика
@@ -79,12 +81,34 @@ void Tinterface::updatePlot() {
         }
 
         // Передаем значения синуса в график
-        plotter->setSinValues(values, numPoints, x1, x2);
+        sinPlotter->setSinValues(values, numPoints, x1, x2);
+        sinPlotter->update();
 
     } else {
-        //Si
+        // Проверка на пустое или неинициализированное значение
+
+        // Создаем новый объект для вычисления значений синуса
+        auto* SiDouble = new TFSi<double>(degree);
+
+        // Количество точек для графика
+        int numPoints = static_cast<int>(x2 - x1);  // Количество точек в интервале
+        if (numPoints <= 1) {
+            return;  // Если количество точек меньше 1, ничего не рисуем
+        }
+
+        values = new double[numPoints];
+
+        // Вычисляем значения синуса для каждого значения X
+        for (int i = 0; i < numPoints; i++) {
+            double point = x1 + i * (x2 - x1) / (numPoints - 1);  // Вычисление текущего значения X
+            values[i] = SiDouble->value(point);  // Получаем значение функции синуса
+        }
+
+        // Передаем значения синуса в график
+        siPlotter->setSiValues(values, numPoints, x1, x2);
+        siPlotter->update();
     }
 
-    plotter->update();
+
 
 }

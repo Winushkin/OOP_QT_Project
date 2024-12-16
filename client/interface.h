@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <QRadioButton>
 #include "sinplotter.h"
+#include "siplotter.h"
 #include "../server/functions.h"
 
 
@@ -25,7 +26,8 @@ class Tinterface : public QWidget
     QLineEdit *ReValueInitial;
     QLineEdit *ReValueFinal;
 
-    SinPlotter* plotter;  // Виджет для отображения графика
+    SinPlotter* sinPlotter;  // Виджет для отображения графика
+    SiPlotter* siPlotter;  // Виджет для отображения графика
     QPushButton* updatePlotButton; // Кнопка обновления
     double* values = nullptr;   // Указатель на массив значений синуса
 public:
