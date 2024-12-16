@@ -19,6 +19,7 @@ class Tinterface : public QWidget
     QRadioButton *SinMode;
     QRadioButton *SiMode;
 
+    QLabel *semicolonIdentificator;
     QLabel *initialValueOfRangeLabel;
     QLabel *finalValueOfRangeLabel;
     QLineEdit *ReValueInitial;
@@ -26,7 +27,7 @@ class Tinterface : public QWidget
 
     SinPlotter* plotter;  // Виджет для отображения графика
     QPushButton* updatePlotButton; // Кнопка обновления
-    double* sineValues = nullptr;   // Указатель на массив значений синуса
+    double* values = nullptr;   // Указатель на массив значений синуса
 public:
     Tinterface(QWidget *parent = 0);
     ~Tinterface();
