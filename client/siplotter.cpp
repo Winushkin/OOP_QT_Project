@@ -48,7 +48,7 @@ void SiPlotter::paintEvent(QPaintEvent *) {
     // Рисование графика
     painter.setPen(QPen(Qt::green, 2)); // Цвет линии — зелёный для Si
 
-    for (int i = 1; i < size; ++i) {
+    for (int i = 1; i < size; i++) {
         QPointF p1(graphArea.left() + (i - 1) * xStep, yCenter - siValues[i - 1] * yScale);
         QPointF p2(graphArea.left() + i * xStep, yCenter - siValues[i] * yScale);
         painter.drawLine(p1, p2);
@@ -75,5 +75,14 @@ void SiPlotter::paintEvent(QPaintEvent *) {
 
     painter.drawLine(graphArea.left() - 5, graphArea.bottom(), graphArea.left() + 5, graphArea.bottom());
     painter.drawText(QPointF(graphArea.left() - 25, graphArea.bottom() - 5), QString::number(-maxAbsValue, 'f', 2));
+}
+
+void SiPlotter::clearPlot() {
+    if (siValues != nullptr) {
+        delete[] siValues;
+        siValues = nullptr;
+    }
+    size = 0;
+    update();
 }
 

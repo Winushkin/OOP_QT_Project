@@ -52,9 +52,7 @@ class TFsin: public TFunction<number> {
             } else if (i % 4 == 3) {
                 derivatives[i] = -1.0 / factorial(i); // -cos(0)
             }
-            cout << derivatives[i] << " ";
         }
-        cout << "\n";
         return derivatives;
     }
     public:

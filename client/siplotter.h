@@ -11,6 +11,7 @@ Q_OBJECT
     double x2 = 0.0;
 public:
     explicit SiPlotter(QWidget* parent = nullptr);
+    void clearPlot();
     ~SiPlotter();
     void setSiValues(double* values, int valuesLen, double x1, double x2);
     void paintEvent(QPaintEvent* event) override;

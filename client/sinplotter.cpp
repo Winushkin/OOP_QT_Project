@@ -44,7 +44,7 @@ void SinPlotter::paintEvent(QPaintEvent *event) {
 
     // Рисуем график синуса
     painter.setPen(QPen(Qt::red, 2));
-    for (int i = 1; i < size; ++i) {
+    for (int i = 1; i < size; i++) {
         QPointF p1(graphArea.left() + (i - 1) * xStep, yCenter - sinValues[i - 1] * yScale);
         QPointF p2(graphArea.left() + i * xStep, yCenter - sinValues[i] * yScale);
         painter.drawLine(p1, p2);
@@ -69,4 +69,13 @@ void SinPlotter::paintEvent(QPaintEvent *event) {
         painter.drawLine(graphArea.left() - 5, y, graphArea.left() + 5, y);  // Рисуем метки на оси Y
         painter.drawText(QPointF(graphArea.left() - 25, y + 5), QString::number(i));  // Метки значений
     }
+}
+
+void SinPlotter::clearPlot() {
+    if (sinValues != nullptr) {
+        delete[] sinValues;
+        sinValues = nullptr;
+    }
+    size = 0;
+    update();
 }

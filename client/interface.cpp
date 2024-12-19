@@ -65,7 +65,6 @@ void Tinterface::updatePlot() {
 
         // Создаем новый объект для вычисления значений синуса
         TFsin<double>* SinDouble = new TFsin<double>(degree);
-
         // Количество точек для графика
         int numPoints = static_cast<int>(x2 - x1);  // Количество точек в интервале
         if (numPoints <= 1) {
@@ -81,6 +80,7 @@ void Tinterface::updatePlot() {
         }
 
         // Передаем значения синуса в график
+        siPlotter->clearPlot();
         sinPlotter->setSinValues(values, numPoints, x1, x2);
         sinPlotter->update();
 
@@ -105,6 +105,7 @@ void Tinterface::updatePlot() {
         }
 
         // Передаем значения синуса в график
+        sinPlotter->clearPlot();
         siPlotter->setSiValues(values, numPoints, x1, x2);
         siPlotter->update();
     }

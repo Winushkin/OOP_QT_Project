@@ -11,6 +11,7 @@ class SinPlotter: public QWidget {
     double x2 = 0.0;
 public:
     explicit SinPlotter(QWidget* parent = nullptr);
+    void clearPlot();
     ~SinPlotter();
     void setSinValues(double* values, int valuesLen, double x1, double x2);
     void paintEvent(QPaintEvent* event) override;
